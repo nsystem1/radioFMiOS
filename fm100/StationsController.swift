@@ -15,6 +15,7 @@ import SwiftyJSON
 import SwiftyXMLParser
 import Kingfisher
 import FacebookShare
+import Firebase
 
 class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataOutputSampleBufferDelegate {
     
@@ -33,6 +34,9 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
     
     @IBOutlet weak var lblError: UILabel!
     @IBOutlet weak var btnTry: UIButton!
+    
+    var iMinSessions = 3
+    var iTryAgainSessions = 6
     
     var covers:[UIImageView] = [UIImageView]()
     
@@ -232,6 +236,7 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
                         let key:String = name + " " + artist
                         Alamofire.request(.GET, "https://itunes.apple.com/search?limit=1&country=IL&term=" + key.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())!).responseJSON { response in
                             if( response.result.value != nil ) {
+                                self.changeDarken(self.covers[1], dark: 0.9)
                                 let result:JSON = JSON(response.result.value!)
                                 if result["resultCount"].intValue > 0 {
                                     let data:JSON = result["results"][0]
@@ -246,6 +251,8 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
                             }
                         }
                     } else {
+                        self.changeDarken(self.covers[1], dark: 0.6)
+                        
                         self.getRadioProgram()
                         self.hideDownloadButton()
                     }
@@ -256,6 +263,20 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
         }
     }
     
+    
+    func changeDarken(img:UIImageView, dark:Float) {
+        print("dark ", dark)
+        
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = (img.bounds)
+        blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        blurEffectView.layer.opacity = dark
+        if img.subviews.count > 0 {
+            img.subviews[0].removeFromSuperview()
+        }
+        img.addSubview(blurEffectView)
+    }
     func startRadio() {
         do {
             try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
@@ -303,9 +324,8 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
         isPlaying = false;
         player.pause()
         
-        
-        UIApplication.sharedApplication().endReceivingRemoteControlEvents()
-        self.resignFirstResponder()
+        //UIApplication.sharedApplication().endReceivingRemoteControlEvents()
+        //self.resignFirstResponder()
     }
     
     func audioInterruption() {
@@ -481,6 +501,36 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
             img.addSubview(blurEffectView)
             img.contentMode = .ScaleAspectFill
         }
+        
+        rateMe()
+    }
+    
+    func rateMe() {
+        let neverRate = NSUserDefaults.standardUserDefaults().boolForKey("neverRate")
+        var numLaunches = NSUserDefaults.standardUserDefaults().integerForKey("numLaunches") + 1
+        
+        if (!neverRate && (numLaunches == iMinSessions || numLaunches >= (iMinSessions + iTryAgainSessions + 1)))
+        {
+            showRateMe()
+            numLaunches = iMinSessions + 1
+        }
+        NSUserDefaults.standardUserDefaults().setInteger(numLaunches, forKey: "numLaunches")
+    }
+    
+    func showRateMe() {
+        let alert = UIAlertController(title: "דרגו אותנו", message: "תודה רבה על השימוש באפליקציה של רדיוס 100FM\nתרצו לדרג אותנו באפ סטור?", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "דרג את האפליקציה", style: UIAlertActionStyle.Default, handler: { alertAction in
+            UIApplication.sharedApplication().openURL(NSURL(string : "itms-apps://itunes.apple.com/app/id946941095")!)
+            alert.dismissViewControllerAnimated(true, completion: nil)
+        }))
+        alert.addAction(UIAlertAction(title: "לא תודה", style: UIAlertActionStyle.Default, handler: { alertAction in
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "neverRate")
+            alert.dismissViewControllerAnimated(true, completion: nil)
+        }))
+        alert.addAction(UIAlertAction(title: "בפעם אחרת", style: UIAlertActionStyle.Default, handler: { alertAction in
+            alert.dismissViewControllerAnimated(true, completion: nil)
+        }))
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     func changeStationsNotification(notification: NSNotification){
@@ -552,6 +602,7 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
     
     override func viewDidAppear(animated: Bool) {
         checkInternet()
+        self.becomeFirstResponder()
     }
     
     override func viewWillAppear(animated: Bool) {

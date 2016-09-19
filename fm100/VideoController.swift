@@ -38,7 +38,8 @@ class VideoController: UIViewController, UIWebViewDelegate, UITableViewDelegate,
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(VideoController.videoFullscreenStoped), name:"UIWindowDidBecomeHiddenNotification", object: nil)
 
         web?.delegate = self
-        web?.loadRequest(NSURLRequest(URL: NSURL(string: "http://100fm.multix.co.il/")!))
+        //web?.loadRequest(NSURLRequest(URL: NSURL(string: "http://100fm.multix.co.il/")!))
+        web?.loadHTMLString("<html><body style=\"margin: 0;\"><video width=\"100%\" height=\"100%\" preload=\"none\" poster=\"http://assets-jpcust.jwpsrv.com/thumbs/teD8sDdM-720.jpg\"><source type=\"application/x-mpegURL\" src=\"http://hlscdn.streamgates.net/radios100fm/abr/playlist.m3u8\" /></video></body></html>", baseURL: nil)
         
         reloadData()
     }
@@ -94,7 +95,8 @@ class VideoController: UIViewController, UIWebViewDelegate, UITableViewDelegate,
         let video:VideoYouTube = videos[indexPath.row]
         
         if( video.id == "live") {
-            web?.loadRequest(NSURLRequest(URL: NSURL(string: "http://100fm.multix.co.il/")!))
+            web?.loadHTMLString("<html><body style=\"margin: 0;\"><video width=\"100%\" height=\"100%\" preload=\"none\" poster=\"http://assets-jpcust.jwpsrv.com/thumbs/teD8sDdM-720.jpg\"><source type=\"application/x-mpegURL\" src=\"http://hlscdn.streamgates.net/radios100fm/abr/playlist.m3u8\" /></video></body></html>", baseURL: nil)
+            //web?.loadRequest(NSURLRequest(URL: NSURL(string: "http://100fm.multix.co.il/")!))
         } else {
             web?.loadRequest(NSURLRequest(URL: NSURL(string: "https://www.youtube.com/embed/" + video.id)!))
         }

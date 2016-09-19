@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -15,24 +16,15 @@
                         <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg" translatesAutoresizingMaskIntoConstraints="NO" id="xVO-xc-mqb">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fm100" translatesAutoresizingMaskIntoConstraints="NO" id="O3N-kO-zBl">
-                                <rect key="frame" x="70" y="183" width="460" height="235"/>
-                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mousepad" translatesAutoresizingMaskIntoConstraints="NO" id="xVO-xc-mqb"/>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="O3N-kO-zBl" secondAttribute="trailing" constant="50" id="5F4-2F-EUw"/>
-                            <constraint firstItem="O3N-kO-zBl" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="50" id="FY5-jq-o4u"/>
                             <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="xVO-xc-mqb" secondAttribute="bottom" id="Up6-y8-HyV"/>
                             <constraint firstAttribute="trailingMargin" secondItem="xVO-xc-mqb" secondAttribute="trailing" constant="-20" id="map-en-mEE"/>
-                            <constraint firstItem="O3N-kO-zBl" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="nnI-3d-LD8"/>
-                            <constraint firstItem="O3N-kO-zBl" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="to9-4H-HMz"/>
                             <constraint firstItem="xVO-xc-mqb" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="topMargin" id="xgn-TF-2OP"/>
                             <constraint firstItem="xVO-xc-mqb" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="-20" id="zq1-sD-1r3"/>
                         </constraints>
@@ -44,7 +36,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="bg" width="375" height="667"/>
-        <image name="fm100" width="716" height="235"/>
+        <image name="mousepad" width="414" height="736"/>
     </resources>
 </document>

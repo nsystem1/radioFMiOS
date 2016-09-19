@@ -17,6 +17,9 @@ typealias ServiceResponseXML = (XML.Accessor, NSError?) -> Void
 
 class FM100Api : NSObject {
     
+    let defaults = NSUserDefaults.standardUserDefaults()
+    static let keyPush = "keyPushToken110"
+    
     static let shared = FM100Api()
     
     var stations:[Station] = [Station]()
@@ -26,7 +29,7 @@ class FM100Api : NSObject {
     
     var isDataLoaded:Bool = false
     
-    let infoURL = "http://demo.goufo.co.il/100fm/"
+    let infoURL = "http://digital.100fm.co.il/app/"
     
     func getInfo(onCompletion: (Bool) -> Void) {
         Alamofire.request(.GET, infoURL, parameters: [:]).responseJSON { response in
@@ -97,5 +100,25 @@ class FM100Api : NSObject {
                     onCompletion(false)
                 }
         }
+    }
+    
+    func setPushToken( val:String ) {
+        setDefaultsValue(val, key: "keyPushToken110")
+    }
+    
+    func getPushToken() -> String {
+        return getDefaultsValue("keyPushToken110", fail: "")
+    }
+    
+    func getDefaultsValue( key:String, fail:String ) -> String {
+        if let str = defaults.stringForKey(key) {
+            return str
+        }
+        return fail
+    }
+    
+    func setDefaultsValue( val:String, key:String ) {
+        defaults.setValue(val, forKey: key)
+        defaults.synchronize()
     }
 }

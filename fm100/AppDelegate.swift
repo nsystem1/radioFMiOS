@@ -11,6 +11,7 @@ import KGFloatingDrawer
 import Firebase
 import Fabric
 import Crashlytics
+import Alamofire
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -36,8 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         
         
-        Fabric.with([Answers.self])
-        
+        //Fabric.with([Answers.self])
         Fabric.with([Crashlytics.self])
 
         UINavigationBar.appearance().setBackgroundImage(UIImage(), forBarMetrics: .Default)
@@ -56,7 +56,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         swipeLeft.direction = UISwipeGestureRecognizerDirection.Left
         drawerViewController.view.addGestureRecognizer(swipeLeft)
         
+        let deviceToken = FM100Api.shared.getPushToken()
+        if (deviceToken == "") {
+            print("There is no deviceToken saved yet.")
+            let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+            UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+            UIApplication.sharedApplication().registerForRemoteNotifications()
+        } else {
+            print("token ", deviceToken)
+        }
+        
+        if ( application.applicationState == UIApplicationState.Inactive || application.applicationState == UIApplicationState.Background  )
+        {
+            //opened from a push notification when the app was on background
+        }
+        
         return true
+    }
+    
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        //print("Got token data! (deviceToken)")
+        
+        let characterSet: NSCharacterSet = NSCharacterSet( charactersInString: "<>" )
+        
+        let deviceTokenString: String = ( deviceToken.description as NSString )
+            .stringByTrimmingCharactersInSet( characterSet )
+            .stringByReplacingOccurrencesOfString( " ", withString: "" ) as String
+        
+        let deviceTokenLocal = FM100Api.shared.getPushToken()
+        if (deviceTokenLocal != deviceTokenString) {
+            FM100Api.shared.setPushToken(deviceTokenString)
+            
+            Alamofire.request(.GET, "http://digital.100fm.co.il/app/token.php?token=" + deviceTokenString).responseJSON { response in
+                
+            }
+        }
     }
 
     func applicationWillResignActive(application: UIApplication) {

@@ -59,6 +59,8 @@ class SportController: UIViewController, CLLocationManagerDelegate, UITableViewD
     
     var pace:[Double] = [Double]()
     
+    var avgSpeed = 0;
+    
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         for location in locations {
             let howRecent = location.timestamp.timeIntervalSinceNow
@@ -145,18 +147,22 @@ class SportController: UIViewController, CLLocationManagerDelegate, UITableViewD
             
             pace.removeAll()
             var paceCount:Double = run[0].distance
+            var speed:Double = 0
+            var lastPaceIndex = 0
             
             for i in 1..<run.count {
                 let lastDistance:Double = run[i].distance - run[i - 1].distance
                 
                 let paceUnit = HKUnit.meterUnit().unitDividedByUnit(HKUnit.secondUnit())
                 let paceQuantity = HKQuantity(unit: paceUnit, doubleValue: lastDistance / 1)
-                let speed = paceQuantity.doubleValueForUnit(paceUnit) * 3.6
+                
+                speed = paceQuantity.doubleValueForUnit(paceUnit) * 3.6
                 totalSpeed += speed
                 speeds.append(speed)
                 
                 paceCount += lastDistance
                 if( Int(paceCount) > pace.count * 1000 + 1000 ) {
+                    lastPaceIndex = i
                     if pace.count == 0 {
                         pace.append(run[i].time)
                     } else {
@@ -164,6 +170,9 @@ class SportController: UIViewController, CLLocationManagerDelegate, UITableViewD
                     }
                     
                 }
+            }
+            if paceCount > 0 {
+                pace.append( (run[run.count-1].time - run[lastPaceIndex].time) * 1000 / (paceCount % 1000) )
             }
             lblSpeed?.text = String(format: "%.1f קמ״ש", totalSpeed / Double(run.count) )
             
@@ -436,8 +445,10 @@ class SportController: UIViewController, CLLocationManagerDelegate, UITableViewD
     
     // MARK: TableViewDelegate
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        currentRun = self.archive[indexPath.row]
-        self.performSegueWithIdentifier("showSummery", sender: self)
+        if( !isSummeryMode ) {
+            currentRun = self.archive[indexPath.row]
+            self.performSegueWithIdentifier("showSummery", sender: self)
+        }
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -488,7 +499,7 @@ class SportController: UIViewController, CLLocationManagerDelegate, UITableViewD
                 cell.textLabel?.text = "קילומטר #" + String(indexPath.row+1) + " נמשך " + printSecondsToHoursMinutesSeconds(Int(self.pace[indexPath.row])) + " דקות"
                 return cell
             } else {
-                cell.textLabel?.text = "ריצה קצה מידי"
+                cell.textLabel?.text = "קילומטר #" + String(indexPath.row+1) + " נמשך " + String(avgSpeed) + " דקות"
             }
         }
         return cell

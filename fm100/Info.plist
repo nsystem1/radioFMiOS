@@ -36,20 +36,20 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>12</string>
+	<string>13</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
-        <string>772acf0f546ef70c34f4c92644ad73fcce66d19c</string>
-        <key>Kits</key>
-        <array>
-            <dict>
-                <key>KitInfo</key>
-                <dict/>
-                <key>KitName</key>
-                <string>Crashlytics</string>
-            </dict>
-        </array>
+		<string>772acf0f546ef70c34f4c92644ad73fcce66d19c</string>
+		<key>Kits</key>
+		<array>
+			<dict>
+				<key>KitInfo</key>
+				<dict/>
+				<key>KitName</key>
+				<string>Crashlytics</string>
+			</dict>
+		</array>
 	</dict>
 	<key>FacebookAppID</key>
 	<string>170868149938893</string>

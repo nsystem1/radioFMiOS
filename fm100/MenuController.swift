@@ -11,11 +11,6 @@ import UIKit
 
 
 class MenuController: UITableViewController {
-    let menu:[String] = [
-      "לאתר רדיוס 100FM"
-        ,"לפייסבוק של רדיוס 100FM"
-        ,"לאינסטגרם של רדיוס 100FM"
-        ]
     var stations:[Station] = [Station]()
     
     @IBAction func clickFB(sender: AnyObject) {
@@ -57,11 +52,11 @@ class MenuController: UITableViewController {
     // MARK: <TableViewDataSource>
     
     override func numberOfSectionsInTableView(tableView: UITableView?) -> Int {
-        return stations.count == 0 ? 1 : 2
+        return stations.count == 0 ? 2 : 3
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 1 : stations.count
+        return section == 1 ? stations.count : 1
     }
     
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -72,18 +67,24 @@ class MenuController: UITableViewController {
         
         let index = indexPath.section * 100 + indexPath.row
         
-        if index >= 100 {
+        if index >= 100 && index < 200 {
             NSNotificationCenter.defaultCenter().postNotificationName("changeStationsNotification", object: index - 100)
             let del = UIApplication.sharedApplication().delegate as! AppDelegate
             del.toggleRightDrawer(self, animated: true)
+        } else if ( index == 200 ) {
+            UIApplication.sharedApplication().openURL(NSURL(string: "http://digital.100fm.co.il/app/policy.pdf")!)
         }
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCellWithIdentifier( indexPath.section == 0 ? "menu0" : "menu1" )! as UITableViewCell
         
-        if indexPath.section > 0 {
-            cell.textLabel?.text = indexPath.section == 0 ? menu[indexPath.row] : stations[indexPath.row].name
+        if indexPath.section == 1 {
+            cell.textLabel?.text = stations[indexPath.row].name
+        }
+        
+        if indexPath.section == 2 {
+            cell.textLabel?.text = "תקנון"
         }
         
         return cell
