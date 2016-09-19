@@ -705,7 +705,7 @@
 					"$(PROJECT_DIR)/build/Debug-iphoneos/GRDB.swift",
 				);
 				INFOPLIST_FILE = fm100/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = il.co.goufo.fm100;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -728,7 +728,7 @@
 					"$(PROJECT_DIR)/build/Debug-iphoneos/GRDB.swift",
 				);
 				INFOPLIST_FILE = fm100/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = il.co.goufo.fm100;
 				PRODUCT_NAME = "$(TARGET_NAME)";
