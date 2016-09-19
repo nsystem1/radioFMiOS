@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>587650242597-gp6abakt11dsddudrr414e9eel4i8pei.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.587650242597-gp6abakt11dsddudrr414e9eel4i8pei</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDtfTr5xX2BOdf3uWXN8FOhi7kET0yv5-o</string>
+	<key>GCM_SENDER_ID</key>
+	<string>587650242597</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>il.co.goufo.fm100</string>
+	<key>PROJECT_ID</key>
+	<string>tactical-snow-135823</string>
+	<key>STORAGE_BUCKET</key>
+	<string>tactical-snow-135823.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:587650242597:ios:342b70a50bad0779</string>
+	<key>DATABASE_URL</key>
+	<string>https://tactical-snow-135823.firebaseio.com</string>
+</dict>
+</plist>
