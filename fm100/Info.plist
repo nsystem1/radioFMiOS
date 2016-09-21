@@ -36,7 +36,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>13</string>
+	<string>14</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -86,8 +86,10 @@
 	<array>
 		<string>FBSPOILER-BLACK.OTF</string>
 		<string>FBSPOILER-LIGHT.OTF</string>
-		<string>OpenSans-Light.ttf</string>
-		<string>OpenSans-Bold.ttf</string>
+        <string>OpenSans-Light.ttf</string>
+        <string>OpenSans-Bold.ttf</string>
+        <string>Assistant-Light.ttf</string>
+        <string>Assistant-Regular.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

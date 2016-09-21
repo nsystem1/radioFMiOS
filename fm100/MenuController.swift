@@ -81,10 +81,11 @@ class MenuController: UITableViewController {
         
         if indexPath.section == 1 {
             cell.textLabel?.text = stations[indexPath.row].name
+            cell.textLabel?.textColor = indexPath.row == 0 ? UIColor.yellowColor() : UIColor.whiteColor()
         }
         
         if indexPath.section == 2 {
-            cell.textLabel?.text = "תקנון"
+            cell.textLabel?.text = "תקנון שימוש באפליקציה"
         }
         
         return cell

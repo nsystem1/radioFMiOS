@@ -107,6 +107,8 @@
 		CF9583911D4630A5007CFB10 /* fake.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = fake.json; sourceTree = "<group>"; };
 		CF998BAC1D3BC13D00CA8BEE /* YouTubeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YouTubeCell.swift; sourceTree = "<group>"; };
 		CFAA54371D6CA43D000FFFB8 /* InfiniteStations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfiniteStations.swift; sourceTree = "<group>"; };
+		CFB9A0E11D92C6EF00EEC872 /* Assistant-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Assistant-Light.ttf"; sourceTree = "<group>"; };
+		CFB9A0E21D92C6EF00EEC872 /* Assistant-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Assistant-Regular.ttf"; sourceTree = "<group>"; };
 		CFC571EC1D6F224D009A770A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CFCC78971D3E640C001E8734 /* fm100.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = fm100.entitlements; sourceTree = "<group>"; };
 		CFE0C0151D77053D00A5CE1A /* GRDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GRDB.framework; path = "Pods/../build/Debug-iphoneos/GRDB.swift/GRDB.framework"; sourceTree = "<group>"; };
@@ -175,6 +177,8 @@
 			isa = PBXGroup;
 			children = (
 				CF9583911D4630A5007CFB10 /* fake.json */,
+				CFB9A0E11D92C6EF00EEC872 /* Assistant-Light.ttf */,
+				CFB9A0E21D92C6EF00EEC872 /* Assistant-Regular.ttf */,
 				CF00585C1D3D1F8A00BCBE18 /* FBSPOILER-BLACK.OTF */,
 				CF00585D1D3D1F8A00BCBE18 /* FBSPOILER-LIGHT.OTF */,
 				CF0058611D3D208F00BCBE18 /* OpenSans-Bold.ttf */,

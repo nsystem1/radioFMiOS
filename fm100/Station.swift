@@ -16,6 +16,7 @@ class Station : Replyable  {
     var slug: String = ""
     var logo: String = ""
     var cover: String = ""
+    var description: String = ""
     var color: UIColor = UIColor(CGColor: UIColor.yellowColor().CGColor)
     
     init(){
@@ -33,6 +34,7 @@ class Station : Replyable  {
         self.slug = post["slug"].stringValue //.asString ?? ""
         self.logo = post["logo"].stringValue //.asString ?? ""
         self.cover = post["cover"].stringValue //.asString ?? ""
+        self.description = post["description"].stringValue //.asString ?? ""
         
         self.color = hexStringToUIColor(post["color"].stringValue)
     }

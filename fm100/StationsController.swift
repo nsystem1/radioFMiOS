@@ -71,7 +71,7 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
     var isInterruption:Bool = false
     var isConnected:Bool = false
     
-    @IBAction func clickPlay(sender: UIButton) {
+    @IBAction func clickPlay() {
         
         if( !self.isConnected ) {
             checkInternet()
@@ -93,6 +93,7 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
                                        imageURL: nil)
         showShareDialog(content, mode: .Automatic)
     }
+    
     func showShareDialog<C: ContentProtocol>(content: C, mode: ShareDialogMode = .Automatic) {
         let dialog = ShareDialog(content: content)
         dialog.presentingViewController = self
@@ -106,8 +107,15 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
         }
     }
     
-    @IBAction func clickOpenItunes(sender: AnyObject) {
+    @IBAction func clickOpenItunes() {
         UIApplication.sharedApplication().openURL(NSURL(string: btnDownload.accessibilityValue! + "&at=1010lpjn")!)
+    }
+    
+    @IBAction func clickStationInfo() {
+        let alertController = UIAlertController(title: currentStation.name, message: currentStation.description, preferredStyle: UIAlertControllerStyle.Alert)
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
     
     func StationChanged(index:Int) {
@@ -265,7 +273,7 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
     
     
     func changeDarken(img:UIImageView, dark:Float) {
-        print("dark ", dark)
+        //print("dark ", dark)
         
         let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
@@ -334,13 +342,13 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
     }
     
     func startAnimation() {
-        print("startAnimation")
+        //print("startAnimation")
         timerAnimation = NSTimer(fireDate: NSDate().dateByAddingTimeInterval(0), interval: animSpeed, target: self, selector: #selector(updateAnimation2), userInfo: nil, repeats: true)
         NSRunLoop.mainRunLoop().addTimer(timerAnimation, forMode: NSRunLoopCommonModes)
     }
     
     func stopAnimation() {
-        print("stopAnimation")
+        //print("stopAnimation")
         timerAnimation.invalidate()
     }
     
@@ -423,7 +431,7 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
         self.stopAnimation()
     }
     
-    @IBAction func toggleRightDrawer(sender: AnyObject) {
+    @IBAction func toggleRightDrawer(_ sender: AnyObject) {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         appDelegate.toggleRightDrawer(sender, animated: true)
     }
@@ -444,16 +452,26 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
         }
     }
     
-    @IBAction func clickCheckInternet(sender: AnyObject) {
+    @IBAction func clickCheckInternet() {
         checkInternet()
         lblError.text = "נראה שזה עדין לא זז..."
+    }
+    
+    
+    
+    @IBAction func clickGotoLive() {
+        list?.changeStation(0)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let logo = UIImage(named: "fm1002")
-        self.navigationItem.titleView = UIImageView(image:logo);
+        //let logo = UIImage(named: "fm1003")
+        let btn = UIButton(frame: CGRectMake(0, 0, 50, 20));
+        btn.setImage(UIImage(named: "fm1003"), forState: UIControlState.Normal)
+        btn.imageView!.contentMode = UIViewContentMode.ScaleAspectFit
+        btn.addTarget(self, action: #selector(StationsController.clickGotoLive), forControlEvents: UIControlEvents.TouchUpInside)
+        self.navigationItem.titleView = btn;
 
         covers = [imgCover, imgCover1]
         

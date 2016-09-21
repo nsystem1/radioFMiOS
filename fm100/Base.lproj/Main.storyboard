@@ -49,7 +49,7 @@
                                     <color key="titleColor" red="1" green="1" blue="0.08235294118" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="clickCheckInternet:" destination="9pv-A4-QxB" eventType="touchUpInside" id="ScH-9f-gQ6"/>
+                                    <action selector="clickCheckInternet" destination="9pv-A4-QxB" eventType="touchUpInside" id="rwP-dF-XM4"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ערוצים דיגיטליים" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KSW-IG-Y4F">
@@ -57,6 +57,12 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="50P-le-rhK">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="clickStationInfo" destination="9pv-A4-QxB" eventType="touchUpInside" id="Vxe-cv-vhP"/>
+                                </connections>
+                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZQD-bn-Imk">
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Line" translatesAutoresizingMaskIntoConstraints="NO" id="dMB-Wo-kbD">
@@ -78,7 +84,7 @@
                                         </constraints>
                                         <state key="normal" image="play"/>
                                         <connections>
-                                            <action selector="clickPlay:" destination="9pv-A4-QxB" eventType="touchUpInside" id="Nlh-dn-ERa"/>
+                                            <action selector="clickPlay" destination="9pv-A4-QxB" eventType="touchUpInside" id="bTk-RU-sOB"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="רדיוס 100FM" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yvs-XC-9er">
@@ -111,7 +117,7 @@
                                     <constraint firstItem="QgT-Bv-caC" firstAttribute="centerY" secondItem="ZQD-bn-Imk" secondAttribute="centerY" id="KMq-5n-sF9"/>
                                     <constraint firstItem="dMB-Wo-kbD" firstAttribute="leading" secondItem="ZQD-bn-Imk" secondAttribute="leading" constant="8" id="LYh-rb-WXB"/>
                                     <constraint firstItem="xmV-uE-zJP" firstAttribute="leading" secondItem="ZQD-bn-Imk" secondAttribute="leading" constant="16" id="M8d-XX-ghX"/>
-                                    <constraint firstAttribute="trailing" secondItem="aTM-xS-jXR" secondAttribute="trailing" id="MYx-Wg-3za"/>
+                                    <constraint firstAttribute="trailing" secondItem="aTM-xS-jXR" secondAttribute="trailing" constant="36" id="MYx-Wg-3za"/>
                                     <constraint firstItem="xmV-uE-zJP" firstAttribute="centerY" secondItem="ZQD-bn-Imk" secondAttribute="centerY" id="OyK-p8-grc"/>
                                     <constraint firstItem="aTM-xS-jXR" firstAttribute="height" secondItem="Yvs-XC-9er" secondAttribute="height" priority="999" id="Slb-Pn-3Ie"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="WiM-iE-NYh"/>
@@ -127,9 +133,9 @@
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="40R-J9-aqE"/>
+                                        <exclude reference="OyK-p8-grc"/>
                                         <exclude reference="0U2-J2-Avg"/>
                                         <exclude reference="Slb-Pn-3Ie"/>
-                                        <exclude reference="OyK-p8-grc"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -143,12 +149,13 @@
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="8" maxY="0.0"/>
                                 <state key="normal" title="Download this song on iTunes"/>
                                 <connections>
-                                    <action selector="clickOpenItunes:" destination="9pv-A4-QxB" eventType="touchUpInside" id="3RL-dO-8fi"/>
+                                    <action selector="clickOpenItunes" destination="9pv-A4-QxB" eventType="touchUpInside" id="jQY-y0-aaH"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="KSW-IG-Y4F" firstAttribute="leading" secondItem="50P-le-rhK" secondAttribute="trailing" constant="8" id="0Rn-TR-Zcb"/>
                             <constraint firstItem="UQ0-tN-OO0" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" id="3fh-y2-V6d"/>
                             <constraint firstItem="ZQD-bn-Imk" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" constant="-20" id="43V-Xx-iri"/>
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="S5c-bc-aIb" secondAttribute="bottom" id="4RH-ft-T50"/>
@@ -173,6 +180,7 @@
                             <constraint firstItem="XmQ-GU-QGG" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="-64" id="Zs3-sQ-ZNT"/>
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="ZQD-bn-Imk" secondAttribute="bottom" id="aRr-fj-5F5"/>
                             <constraint firstItem="S5c-bc-aIb" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" id="fBb-eF-M57"/>
+                            <constraint firstItem="50P-le-rhK" firstAttribute="centerY" secondItem="KSW-IG-Y4F" secondAttribute="centerY" id="h93-E6-kaq"/>
                             <constraint firstItem="KSW-IG-Y4F" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="8" id="iQE-w1-3tC"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ZQD-bn-Imk" secondAttribute="trailing" constant="-20" id="j2B-ha-DPy"/>
                             <constraint firstItem="2a5-uS-Pnk" firstAttribute="top" secondItem="tsR-hK-woN" secondAttribute="topMargin" id="oc1-y4-1yY"/>
@@ -206,7 +214,7 @@
                         <barButtonItem key="rightBarButtonItem" image="List" id="lSa-RV-Yws">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
-                                <action selector="toggleRightDrawer:" destination="9pv-A4-QxB" id="44V-JT-Wj0"/>
+                                <action selector="toggleRightDrawer:" destination="9pv-A4-QxB" id="XTw-wP-aO3"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -246,10 +254,10 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="youtube" rowHeight="95" id="FqZ-03-5OB" customClass="YouTubeCell" customModule="fm100" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="1000" height="95"/>
+                                        <rect key="frame" x="0.0" y="28" width="383" height="95"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FqZ-03-5OB" id="3U1-86-amz">
-                                            <frame key="frameInset" width="1000" height="95"/>
+                                            <frame key="frameInset" width="383" height="95"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J88-lw-fuw">
@@ -405,7 +413,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XES-wG-kcb" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="ערוצים דיגיטליים" image="radio_on" id="acW-dT-cKf"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="sFM-5E-eWQ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="sFM-5E-eWQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -424,7 +432,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hxF-yY-Z22" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="שידור ישיר" image="video_on" id="cPa-gy-q4n"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" shadowImage="shedow" id="QmY-tg-BWj">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" shadowImage="shedow" id="QmY-tg-BWj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -453,9 +461,12 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Z0Y-4c-Xdj">
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="T0h-GM-EaZ">
-                                    <rect key="frame" x="0.0" y="0.0" width="1000" height="241"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="383" height="241"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="12K-lv-HyZ">
+                                            <color key="backgroundColor" red="0.21960784310000001" green="0.63137254899999995" blue="0.10550537109999999" alpha="0.0" colorSpace="calibratedRGB"/>
+                                        </view>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Line" translatesAutoresizingMaskIntoConstraints="NO" id="z7R-oh-IJP"/>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="מהירות" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rwe-vN-w0U">
                                             <fontDescription key="fontDescription" name="FbSpoiler-Black" family="FbSpoiler" pointSize="17"/>
@@ -496,6 +507,7 @@
                                     </subviews>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="12K-lv-HyZ" secondAttribute="bottom" id="3oj-51-76J"/>
                                         <constraint firstItem="xFA-7b-Bii" firstAttribute="leading" secondItem="T0h-GM-EaZ" secondAttribute="leading" constant="20" id="3xb-RB-lpC"/>
                                         <constraint firstAttribute="trailing" secondItem="tcr-PC-3wz" secondAttribute="trailing" constant="20" id="5VU-1g-9oh"/>
                                         <constraint firstItem="uY3-DI-QF3" firstAttribute="top" secondItem="bku-lC-p32" secondAttribute="bottom" constant="64" id="7ob-Q8-ja3"/>
@@ -511,11 +523,13 @@
                                         <constraint firstItem="9us-jy-Yy8" firstAttribute="top" secondItem="bku-lC-p32" secondAttribute="bottom" constant="50" id="SJX-Ra-6Bo"/>
                                         <constraint firstItem="bku-lC-p32" firstAttribute="leading" secondItem="T0h-GM-EaZ" secondAttribute="leading" constant="20" id="Sa3-DS-XtZ"/>
                                         <constraint firstItem="tcr-PC-3wz" firstAttribute="top" secondItem="9us-jy-Yy8" secondAttribute="bottom" constant="8" id="T8h-1N-KCT"/>
+                                        <constraint firstItem="12K-lv-HyZ" firstAttribute="leading" secondItem="T0h-GM-EaZ" secondAttribute="leading" id="WLL-2K-Bpb"/>
                                         <constraint firstItem="u6f-1W-GCT" firstAttribute="top" secondItem="tcr-PC-3wz" secondAttribute="bottom" constant="8" id="Wr4-Sx-n98"/>
                                         <constraint firstItem="xFA-7b-Bii" firstAttribute="top" secondItem="T0h-GM-EaZ" secondAttribute="top" constant="189" id="ZWl-9Q-ZQ3"/>
                                         <constraint firstItem="b57-4t-hJ1" firstAttribute="centerX" secondItem="T0h-GM-EaZ" secondAttribute="centerX" id="a64-K9-unK"/>
                                         <constraint firstAttribute="trailing" secondItem="bku-lC-p32" secondAttribute="trailing" constant="20" id="cT2-Ll-FJJ"/>
                                         <constraint firstItem="u6f-1W-GCT" firstAttribute="leading" secondItem="xFA-7b-Bii" secondAttribute="trailing" constant="42" id="gO4-Vu-hMv"/>
+                                        <constraint firstItem="12K-lv-HyZ" firstAttribute="top" secondItem="T0h-GM-EaZ" secondAttribute="top" constant="32" id="hle-m4-Aom"/>
                                         <constraint firstItem="tcr-PC-3wz" firstAttribute="width" secondItem="z7R-oh-IJP" secondAttribute="width" id="iEZ-B4-GoI"/>
                                         <constraint firstItem="bku-lC-p32" firstAttribute="top" secondItem="b57-4t-hJ1" secondAttribute="bottom" constant="2" id="iOc-c9-p8O"/>
                                         <constraint firstAttribute="bottom" secondItem="u6f-1W-GCT" secondAttribute="bottom" constant="15" id="lDW-i1-fdf"/>
@@ -523,23 +537,24 @@
                                         <constraint firstItem="9us-jy-Yy8" firstAttribute="width" secondItem="rwe-vN-w0U" secondAttribute="width" id="loZ-XC-hfH"/>
                                         <constraint firstItem="b57-4t-hJ1" firstAttribute="top" secondItem="T0h-GM-EaZ" secondAttribute="top" constant="8" id="oao-XM-URr"/>
                                         <constraint firstItem="xFA-7b-Bii" firstAttribute="top" secondItem="z7R-oh-IJP" secondAttribute="bottom" constant="8" id="rsG-Yd-9ET"/>
+                                        <constraint firstAttribute="trailing" secondItem="12K-lv-HyZ" secondAttribute="trailing" id="vhq-v9-b8m"/>
                                         <constraint firstAttribute="bottom" secondItem="xFA-7b-Bii" secondAttribute="bottom" constant="15" id="vm1-yr-aBn"/>
                                         <constraint firstItem="rwe-vN-w0U" firstAttribute="leading" secondItem="T0h-GM-EaZ" secondAttribute="leading" constant="20" id="wAH-uW-DxP"/>
                                         <constraint firstItem="tcr-PC-3wz" firstAttribute="leading" secondItem="z7R-oh-IJP" secondAttribute="trailing" constant="42" id="wID-yb-D7S"/>
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
-                                            <exclude reference="ZWl-9Q-ZQ3"/>
                                             <exclude reference="BgT-b4-ZAq"/>
+                                            <exclude reference="ZWl-9Q-ZQ3"/>
                                         </mask>
                                     </variation>
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="workout" id="FCI-9x-FUq" customClass="RunCell" customModule="fm100" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="269" width="1000" height="44"/>
+                                        <rect key="frame" x="0.0" y="269" width="383" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FCI-9x-FUq" id="awp-KL-ZRA">
-                                            <frame key="frameInset" width="1000" height="43.5"/>
+                                            <frame key="frameInset" width="383" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="86h-OH-YYL">
@@ -583,14 +598,14 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="none" textLabel="NOa-6f-6Ui" style="IBUITableViewCellStyleDefault" id="hOE-50-nCw">
-                                        <rect key="frame" x="0.0" y="313" width="1000" height="44"/>
+                                        <rect key="frame" x="0.0" y="313" width="383" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hOE-50-nCw" id="EKO-Kl-1EP">
-                                            <frame key="frameInset" width="1000" height="43.5"/>
+                                            <frame key="frameInset" width="383" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NOa-6f-6Ui">
-                                                    <frame key="frameInset" minX="164" width="672" height="43.5"/>
+                                                    <frame key="frameInset" minX="15" width="353" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="FbSpoiler-Black" family="FbSpoiler" pointSize="16"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -673,6 +688,9 @@
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="zjp-IU-n0d">
+                        <barButtonItem key="leftBarButtonItem" image="like" id="8pK-LW-dM2">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="List" id="hz5-Ib-cEn">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
@@ -690,6 +708,7 @@
                         <outlet property="lblSpeed" destination="xFA-7b-Bii" id="o1U-BJ-ri7"/>
                         <outlet property="lblTimer" destination="u6f-1W-GCT" id="Enc-hX-dOW"/>
                         <outlet property="tableView" destination="Z0Y-4c-Xdj" id="Xb1-CW-PqP"/>
+                        <outlet property="viewGraph" destination="12K-lv-HyZ" id="m9q-kW-h9T"/>
                         <segue destination="CtK-Wq-vAq" kind="presentation" identifier="showSummery" id="FsE-Ej-n2E"/>
                     </connections>
                 </viewController>
@@ -849,11 +868,11 @@
                                         <rect key="frame" x="0.0" y="478" width="383" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lnC-Fg-ypO" id="Ric-6B-y0J">
-                                            <frame key="frameInset" width="383" height="44"/>
+                                            <frame key="frameInset" width="383" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IfH-fR-APU">
-                                                    <frame key="frameInset" minX="15" width="353" height="43.5"/>
+                                                    <frame key="frameInset" minX="15" width="353" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="FbSpoiler-Black" family="FbSpoiler" pointSize="16"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -868,11 +887,11 @@
                                         <rect key="frame" x="0.0" y="522" width="383" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XJS-MQ-XhF" id="6Ex-Yd-jDB">
-                                            <frame key="frameInset" width="383" height="44"/>
+                                            <frame key="frameInset" width="383" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XJO-vq-1yl">
-                                                    <frame key="frameInset" minX="15" width="353" height="43.5"/>
+                                                    <frame key="frameInset" minX="15" width="353" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="FbSpoiler-Black" family="FbSpoiler" pointSize="16"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -941,7 +960,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hVD-OK-TuU" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="כושר" image="run_on" id="dQj-7e-Mh6"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" shadowImage="shedow" id="UfF-M3-vLU">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" translucent="NO" shadowImage="shedow" id="UfF-M3-vLU">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -972,10 +991,10 @@
                                 <color key="separatorColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="program" rowHeight="100" id="7me-HQ-GE8" customClass="ProgramCell" customModule="fm100" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="1000" height="100"/>
+                                        <rect key="frame" x="0.0" y="28" width="383" height="100"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7me-HQ-GE8" id="MYr-mY-zJX">
-                                            <frame key="frameInset" width="1000" height="99.5"/>
+                                            <frame key="frameInset" width="383" height="99"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZaK-1w-dI5">
@@ -1057,6 +1076,9 @@
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="IO4-M2-IaP">
+                        <barButtonItem key="leftBarButtonItem" image="like" id="ey2-Ed-d2N">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="List" id="CQx-K1-xo1">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
@@ -1083,7 +1105,7 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="menu0" rowHeight="64" id="w7O-qs-9gX">
-                                <rect key="frame" x="0.0" y="55.5" width="375" height="64"/>
+                                <rect key="frame" x="0.0" y="56" width="375" height="64"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="w7O-qs-9gX" id="Zaf-Ek-dP3">
                                     <frame key="frameInset" width="375" height="64"/>
@@ -1124,7 +1146,7 @@
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="menu1" textLabel="ZGQ-4S-1Cm" rowHeight="64" style="IBUITableViewCellStyleDefault" id="KAv-Vt-qKm">
-                                <rect key="frame" x="0.0" y="119.5" width="375" height="64"/>
+                                <rect key="frame" x="0.0" y="120" width="375" height="64"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KAv-Vt-qKm" id="TFN-le-3Rn">
                                     <frame key="frameInset" width="375" height="64"/>
@@ -1180,7 +1202,7 @@
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <tabBarItem key="tabBarItem" title="לוח שידורים" image="menu_on" id="vG7-N2-af6"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="6ui-Tf-Fc1">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" translucent="NO" id="6ui-Tf-Fc1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

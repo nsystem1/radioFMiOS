@@ -12,6 +12,7 @@ import CoreLocation
 import HealthKit
 import GRDB
 import SwiftyJSON
+import FacebookShare
 
 class SportController: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource {
     
@@ -130,6 +131,7 @@ class SportController: UIViewController, CLLocationManagerDelegate, UITableViewD
         if( lastSeconds > 0 ) {
             lblSpeed!.text = String(format: "%.1f קמ״ש", speed)
         }
+        updateAnimation()
     }
     
     func showSummery() {
@@ -250,7 +252,7 @@ class SportController: UIViewController, CLLocationManagerDelegate, UITableViewD
         layer.path = graphPath.CGPath
         layer.strokeColor = UIColor.init(red: 44.0/255.0, green: 68.0/255.0, blue: 143.0/255.0, alpha: 0.5).CGColor
         layer.lineWidth = 1.0
-        layer.fillColor = UIColor.init(red: 40.0/255.0, green: 106.0/255.0, blue: 170.0/255.0, alpha: 0.5).CGColor
+        layer.fillColor = isSummeryMode ? UIColor.init(red: 40.0/255.0, green: 106.0/255.0, blue: 170.0/255.0, alpha: 0.5).CGColor : UIColor.init(red: 22.0/255.0, green: 154.0/255.0, blue: 180.0/255.0, alpha: 0.5).CGColor
         
         layerGraph.removeFromSuperlayer()
         self.l.addSublayer(layer)
@@ -296,6 +298,8 @@ class SportController: UIViewController, CLLocationManagerDelegate, UITableViewD
         btnRestart?.hidden = true
         imgSignal.hidden = true
         
+        layerGraph.removeFromSuperlayer()
+        
         addRunToDatabase()
         
         self.performSegueWithIdentifier("showSummery", sender: self)
@@ -323,7 +327,7 @@ class SportController: UIViewController, CLLocationManagerDelegate, UITableViewD
         }
     }
     
-    @IBAction func toggleRightDrawer(sender: AnyObject) {
+    @IBAction func toggleRightDrawer(_ sender: AnyObject) {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         appDelegate.toggleRightDrawer(sender, animated: true)
     }
@@ -431,14 +435,37 @@ class SportController: UIViewController, CLLocationManagerDelegate, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let logo = UIImage(named: "fm1002")
-        self.navigationItem.titleView = UIImageView(image:logo);MALLOC_ADMIN_REGION_RANGE_TYPE
+        let img = UIImageView(frame: CGRectMake(0, 0, 50, 20))
+        img.image = UIImage(named: "fm1003")
+        img.contentMode = UIViewContentMode.ScaleAspectFit
+        self.navigationItem.titleView = img;
         
         if( isSummeryMode ) {
             showSummery()
         } else {
             self.navigationController!.navigationBar.setBackgroundImage(UIImage(named: "header"), forBarMetrics: .Default)
             loadDatabase();
+        }
+    }
+    
+    @IBAction func showFacebook() {
+        let content = LinkShareContent(url: NSURL(string: "http://digital.100fm.co.il/")!,
+                                       title: "",
+                                       description: "",
+                                       imageURL: nil)
+        showShareDialog(content, mode: .Automatic)
+    }
+    
+    func showShareDialog<C: ContentProtocol>(content: C, mode: ShareDialogMode = .Automatic) {
+        let dialog = ShareDialog(content: content)
+        dialog.presentingViewController = self
+        dialog.mode = mode
+        do {
+            try dialog.show()
+        } catch (let error) {
+            let alert = UIAlertController(title: "Invalid share content", message: "Failed to present share dialog with error \(error)", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
         }
     }
     

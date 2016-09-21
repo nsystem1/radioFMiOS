@@ -10,6 +10,7 @@ import Foundation
 import AVFoundation
 import Alamofire
 import SwiftyXMLParser
+import FacebookShare
 
 class TimeTableController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var loadingItems:Int = 0
@@ -30,8 +31,10 @@ class TimeTableController: UIViewController, UITableViewDelegate, UITableViewDat
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        let logo = UIImage(named: "fm1002")
-        self.navigationItem.titleView = UIImageView(image:logo);
+        let img = UIImageView(frame: CGRectMake(0, 0, 50, 20))
+        img.image = UIImage(named: "fm1003")
+        img.contentMode = UIViewContentMode.ScaleAspectFit
+        self.navigationItem.titleView = img;
         
         self.navigationController!.navigationBar.setBackgroundImage(UIImage(named: "header"), forBarMetrics: .Default)
         
@@ -88,6 +91,27 @@ class TimeTableController: UIViewController, UITableViewDelegate, UITableViewDat
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func showFacebook() {
+        let content = LinkShareContent(url: NSURL(string: "http://digital.100fm.co.il/")!,
+                                       title: "",
+                                       description: "",
+                                       imageURL: nil)
+        showShareDialog(content, mode: .Automatic)
+    }
+    
+    func showShareDialog<C: ContentProtocol>(content: C, mode: ShareDialogMode = .Automatic) {
+        let dialog = ShareDialog(content: content)
+        dialog.presentingViewController = self
+        dialog.mode = mode
+        do {
+            try dialog.show()
+        } catch (let error) {
+            let alert = UIAlertController(title: "Invalid share content", message: "Failed to present share dialog with error \(error)", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
     }
     
     // MARK: TableViewDelegate

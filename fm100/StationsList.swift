@@ -32,6 +32,8 @@ class StationsList : UIScrollView, UIScrollViewDelegate {
     func setStations(stations:[Station]) {
         self.stations = stations;
         
+        self.decelerationRate = UIScrollViewDecelerationRateFast
+        
         reloadData()
         reloadData()
         self.selected = self.stations.count
@@ -93,6 +95,8 @@ class StationsList : UIScrollView, UIScrollViewDelegate {
             btn.accessibilityIdentifier = String(index)
             btn.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
             btn.imageView?.clipsToBounds = true
+            btn.contentMode = UIViewContentMode.ScaleAspectFit
+            btn.clipsToBounds = true
             btn.kf_setImageWithURL(NSURL(string: self.stations[index].logo)!, forState:UIControlState.Normal)
             btn.addTarget(self, action: #selector(StationsList.changeStaionClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
             
@@ -118,7 +122,9 @@ class StationsList : UIScrollView, UIScrollViewDelegate {
     }
     
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        scrollToTheSelectedCell();
+        if( !decelerate ) {
+            scrollToTheSelectedCell();
+        }
     }
     
     func scrollViewWillBeginDecelerating(scrollView: UIScrollView) {
@@ -158,6 +164,8 @@ class StationsList : UIScrollView, UIScrollViewDelegate {
                 btn.accessibilityIdentifier = String(index)
                 btn.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
                 btn.imageView?.clipsToBounds = true
+                btn.contentMode = UIViewContentMode.ScaleAspectFit
+                btn.clipsToBounds = true
                 btn.kf_setImageWithURL(NSURL(string: self.stations[index].logo)!, forState:UIControlState.Normal)
                 btn.addTarget(self, action: #selector(StationsList.changeStaionClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
                 
@@ -196,4 +204,5 @@ class StationsList : UIScrollView, UIScrollViewDelegate {
         arrow1.frame = CGRectMake(8, v.frame.origin.y - pos + v.frame.height / 2,arrow1.frame.size.width, arrow1.frame.size.height)
         arrow2.frame = CGRectMake(self.frame.size.width - 20 - 8, arrow1.frame.origin.y, arrow2.frame.size.width, arrow2.frame.size.height)
     }
+    
 }
