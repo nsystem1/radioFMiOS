@@ -52,7 +52,7 @@ class StationsList : UIScrollView, UIScrollViewDelegate {
             self.arrow1.hidden = false
             self.arrow2.hidden = false
             
-            self.changeStation(0);
+            //self.changeStation(0);
         }
         
         UIView.animateWithDuration(0.3, delay: 1.7, options: .CurveEaseInOut, animations: {
@@ -96,8 +96,12 @@ class StationsList : UIScrollView, UIScrollViewDelegate {
             btn.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
             btn.imageView?.clipsToBounds = true
             btn.contentMode = UIViewContentMode.ScaleAspectFit
+            btn.contentVerticalAlignment = UIControlContentVerticalAlignment.Center
+            btn.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Center
+            //btn.backgroundColor = UIColor.blueColor()
             btn.clipsToBounds = true
             btn.kf_setImageWithURL(NSURL(string: self.stations[index].logo)!, forState:UIControlState.Normal)
+            //btn.kf_setBackgroundImageWithURL(NSURL(string: self.stations[index].logo)!, forState:UIControlState.Normal)
             btn.addTarget(self, action: #selector(StationsList.changeStaionClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
             
             views.append(btn)
@@ -140,8 +144,7 @@ class StationsList : UIScrollView, UIScrollViewDelegate {
     }
     
     func drawStation(pos:CGFloat) {
-        
-        for i in 0...self.views.count - 1 {
+        for i in 0..<self.views.count {
             let btn:UIButton = self.views[i]
             var scale:CGFloat = cos( CGFloat(M_PI) * (pos - (imgh + imgh2) * CGFloat(i)) / self.frame.height)
             
@@ -152,6 +155,11 @@ class StationsList : UIScrollView, UIScrollViewDelegate {
             if scale < 0.2 {
                 scale = 0.2
             }
+            if scale > 1 {
+                scale = 1
+            }
+           // btn.frame = CGRectMake(0, self.frame.size.height / 2 + CGFloat(i) * (imgh + imgh2) - 0.5 * imgh + 50, self.frame.size.width, imgh * scale)
+            //btn.frame = CGRectMake(0, btn.frame.origin.y, btn.frame.size.width, imgh * scale)
             btn.transform = CGAffineTransformMakeScale(scale, scale);
         }
     }
@@ -204,5 +212,4 @@ class StationsList : UIScrollView, UIScrollViewDelegate {
         arrow1.frame = CGRectMake(8, v.frame.origin.y - pos + v.frame.height / 2,arrow1.frame.size.width, arrow1.frame.size.height)
         arrow2.frame = CGRectMake(self.frame.size.width - 20 - 8, arrow1.frame.origin.y, arrow2.frame.size.width, arrow2.frame.size.height)
     }
-    
 }

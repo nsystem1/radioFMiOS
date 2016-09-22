@@ -326,8 +326,8 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
         
         btnPlay?.setImage(UIImage(named: "play"), forState: UIControlState.Normal)
         
-        btnPlay?.hidden = false
-        indPlayLoading?.hidden = true
+        //btnPlay?.hidden = false
+        //indPlayLoading?.hidden = true
         
         isPlaying = false;
         player.pause()
@@ -501,7 +501,7 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
         
         
         let volume:SubtleVolume = SubtleVolume(style: .Plain)
-        volume.frame = CGRect(x: 0, y: 64, width: view.frame.size.width, height: 4)
+        volume.frame = CGRect(x: 0, y: 64, width: view.frame.size.width, height: 2)
         volume.barTintColor = UIColor.yellowColor()
         volume.animation = .SlideDown
         view.addSubview(volume)
@@ -552,7 +552,9 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
     }
     
     func changeStationsNotification(notification: NSNotification){
-        changeStation( (notification.object as? Int)! )
+        let index:Int = (notification.object as? Int)!
+        self.changeStation( index )
+        self.list?.changeStation(index)
     }
     func startAnimationNotification(notification: NSNotification){
         if isPlaying {
@@ -580,7 +582,6 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
         let station = FM100Api.shared.stations[index]
         if( self.currentStation.slug != station.slug ) {
             self.currentStation = FM100Api.shared.stations[index]
-            self.list?.changeStation(index)
             stopRadio()
             startRadio();
         }

@@ -34,6 +34,9 @@ class VideoController: UIViewController, UIWebViewDelegate, UITableViewDelegate,
         img.contentMode = UIViewContentMode.ScaleAspectFit
         self.navigationItem.titleView = img;
         
+        list!.estimatedRowHeight = 200.0
+        list!.rowHeight = UITableViewAutomaticDimension
+        
         self.navigationController!.navigationBar.setBackgroundImage(UIImage(named: "header"), forBarMetrics: .Default)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(VideoController.methodOfReceivedNotification(_:)), name:"reloadStationsNotification", object: nil)
