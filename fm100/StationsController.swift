@@ -264,6 +264,8 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
                         self.getRadioProgram()
                         self.hideDownloadButton()
                     }
+                } else {
+                    FM100Api.shared.addFavChannel(currentStation.slug)
                 }
             } else {
                 self.hideDownloadButton()
@@ -312,6 +314,8 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
                 
                 UIApplication.sharedApplication().beginReceivingRemoteControlEvents()
                 self.becomeFirstResponder()
+                
+                
             } catch let error as NSError {
                 print(error.localizedDescription)
             }

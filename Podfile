@@ -6,11 +6,11 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 target 'fm100' do
 	pod 'KGFloatingDrawer', '~> 0.2.0'
-    pod 'SwiftyJSON'
+    pod 'SwiftyJSON', '~> 2.4.0'
     pod 'UIColor_Hex_Swift', '~> 2.1'
     pod 'Alamofire', '~> 3.4'
     pod 'Kingfisher', '~> 2.4'
-    pod 'SwiftyXMLParser', :git => 'https://github.com/yahoojapan/SwiftyXMLParser.git'
+    pod 'SwiftyXMLParser', :git => 'https://github.com/yahoojapan/SwiftyXMLParser.git', :tag => '2.3.0'
     pod 'FacebookCore'
     pod 'FacebookLogin'
     pod 'FacebookShare'

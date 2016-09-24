@@ -121,4 +121,12 @@ class FM100Api : NSObject {
         defaults.setValue(val, forKey: key)
         defaults.synchronize()
     }
+    
+    func addFavChannel(slug:String) {
+        
+    }
+    
+    func getFavChannels() -> [Station] {
+        
+    }
 }
