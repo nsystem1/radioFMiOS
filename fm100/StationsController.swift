@@ -265,7 +265,7 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
                         self.hideDownloadButton()
                     }
                 } else {
-                    FM100Api.shared.addFavChannel(currentStation.slug)
+                    FM100Api.shared.addFavChannel(self.currentStation.slug)
                 }
             } else {
                 self.hideDownloadButton()

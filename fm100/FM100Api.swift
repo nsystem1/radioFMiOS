@@ -126,7 +126,7 @@ class FM100Api : NSObject {
         
     }
     
-    func getFavChannels() -> [Station] {
+    /*func getFavChannels() -> [Station] {
         
-    }
+    }*/
 }
