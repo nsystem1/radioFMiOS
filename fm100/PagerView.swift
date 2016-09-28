@@ -11,7 +11,7 @@ import UIKit
 
 class PagerView : UIScrollView {
     var queue:[UIViewController] = [UIViewController]();
-        
+    
     func addController( controller:UIViewController ) {
         controller.view.frame = CGRectMake(self.frame.size.width * CGFloat(queue.count), 0, self.frame.size.width, self.frame.size.height)
         controller.view.clipsToBounds = true
@@ -49,7 +49,7 @@ class PagerView : UIScrollView {
                     table.view.frame = CGRectMake(newSize.width * CGFloat(index), 0, newSize.width, newSize.height)
                     table.tableView.reloadData()
                 } else {
-                    let table:UIViewController = self.queue[index] 
+                    let table:UIViewController = self.queue[index]
                     table.view.frame = CGRectMake(newSize.width * CGFloat(index), 0, newSize.width, newSize.height)
                 }
             }

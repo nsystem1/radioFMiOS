@@ -23,7 +23,7 @@ class ProgramCell: UITableViewCell {
         self.lblTitle.text = program.name
         self.lblAutor.text = program.author
         self.lblStart.text = program.start
-        self.imgPicture.hidden = !anim  
+        self.imgPicture.hidden = !anim
         /*if( anim ) {
             animation1()
         } else {

@@ -48,7 +48,7 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
     let captureAudioSession = AVCaptureSession()
     
     let animSpeed:Double = 1 / 10
-
+    
     var player = AVPlayer()
     var graphIndex:Int = 0
     var graphData:JSON = 0
@@ -113,13 +113,18 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
     
     @IBAction func clickStationInfo() {
         let alertController = UIAlertController(title: currentStation.name, message: currentStation.description, preferredStyle: UIAlertControllerStyle.Alert)
-        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+        alertController.addAction(UIAlertAction(title: "לסגירה", style: UIAlertActionStyle.Default,handler: nil))
         
         self.presentViewController(alertController, animated: true, completion: nil)
     }
     
     func StationChanged(index:Int) {
         changeStation(index)
+        
+        FIRAnalytics.logEventWithName("change_channel", parameters: [
+            "name": self.currentStation.slug,
+            "full_text": self.currentStation.name
+            ])
     }
     
     func changeSongDisplay( name:String, artist:String, cache:Bool) {
@@ -292,7 +297,7 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
             try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
             do {
                 try AVAudioSession.sharedInstance().setActive(true)
-               
+                
                 isPlaying = true
                 isAnimationGoing = true
                 btnPlay?.setImage(UIImage(named: "stop"), forState: UIControlState.Normal)
@@ -435,7 +440,7 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
         self.stopAnimation()
     }
     
-    @IBAction func toggleRightDrawer(_ sender: AnyObject) {
+    @IBAction func toggleRightDrawer(sender: AnyObject) {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         appDelegate.toggleRightDrawer(sender, animated: true)
     }
@@ -469,14 +474,14 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         //let logo = UIImage(named: "fm1003")
         let btn = UIButton(frame: CGRectMake(0, 0, 50, 20));
         btn.setImage(UIImage(named: "fm1003"), forState: UIControlState.Normal)
         btn.imageView!.contentMode = UIViewContentMode.ScaleAspectFit
         btn.addTarget(self, action: #selector(StationsController.clickGotoLive), forControlEvents: UIControlEvents.TouchUpInside)
         self.navigationItem.titleView = btn;
-
+        
         covers = [imgCover, imgCover1]
         
         list?.delegateStation = self
@@ -571,8 +576,8 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
             isInterruption = false
             if isPlaying {
                 stopAnimation()
+                startRadio();
             }
-            startRadio();
         }
     }
     
@@ -612,9 +617,10 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
             FM100Api.shared.getInfo({ status in
                 dispatch_async(dispatch_get_main_queue(),{
                     if( status ) {
-                        self.currentStation = FM100Api.shared.stations[0]
+                        //self.currentStation = FM100Api.shared.stations[0]
+                        self.changeStation(0)
                         self.list?.setStations(FM100Api.shared.stations)
-                        self.startRadio();
+                        //self.startRadio();
                         
                         NSNotificationCenter.defaultCenter().postNotificationName("reloadStationsNotification", object: nil)
                     }
@@ -640,13 +646,12 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
     override func viewDidLayoutSubviews() {
         self.list?.reloadLayout()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
+    
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.LightContent
     }
 }
-

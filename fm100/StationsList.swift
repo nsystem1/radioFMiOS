@@ -87,7 +87,7 @@ class StationsList : UIScrollView, UIScrollViewDelegate {
         self.changeStation( Int( object.accessibilityIdentifier! )! )
         self.delegateStation.StationChanged(self.selected % self.stations.count)
     }
-
+    
     
     func reloadData() {
         for index in 0..<self.stations.count {
@@ -158,7 +158,7 @@ class StationsList : UIScrollView, UIScrollViewDelegate {
             if scale > 1 {
                 scale = 1
             }
-           // btn.frame = CGRectMake(0, self.frame.size.height / 2 + CGFloat(i) * (imgh + imgh2) - 0.5 * imgh + 50, self.frame.size.width, imgh * scale)
+            // btn.frame = CGRectMake(0, self.frame.size.height / 2 + CGFloat(i) * (imgh + imgh2) - 0.5 * imgh + 50, self.frame.size.width, imgh * scale)
             //btn.frame = CGRectMake(0, btn.frame.origin.y, btn.frame.size.width, imgh * scale)
             btn.transform = CGAffineTransformMakeScale(scale, scale);
         }

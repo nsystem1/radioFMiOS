@@ -46,7 +46,7 @@ class SportController: UIViewController, CLLocationManagerDelegate, UITableViewD
     var l: CALayer {
         return viewGraph!.layer
     }
-
+    
     var isSummeryMode:Bool = false
     
     var loadingItems:Int = 0
@@ -143,7 +143,7 @@ class SportController: UIViewController, CLLocationManagerDelegate, UITableViewD
         
         lblTimer!.text = printSecondsToHoursMinutesSeconds( Int(sec) )
         lblDistance!.text = String(format: "%.2f ק״מ", distancePace / 1000)
-    
+        
         var totalSpeed:Double = 0
         if( run.count > 0 ) {
             
@@ -323,11 +323,11 @@ class SportController: UIViewController, CLLocationManagerDelegate, UITableViewD
     }
     
     @IBAction func closeWindow(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true) { 
+        self.dismissViewControllerAnimated(true) {
         }
     }
     
-    @IBAction func toggleRightDrawer(_ sender: AnyObject) {
+    @IBAction func toggleRightDrawer(sender: AnyObject) {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         appDelegate.toggleRightDrawer(sender, animated: true)
     }

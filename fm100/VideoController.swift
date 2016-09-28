@@ -20,7 +20,7 @@ class VideoController: UIViewController, UIWebViewDelegate, UITableViewDelegate,
     var videos:[VideoYouTube] = [VideoYouTube]()
     
     var loadingItems:Int = 0
-
+    
     @IBAction func toggleRightDrawer(sender: AnyObject) {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         appDelegate.toggleRightDrawer(sender, animated: true)
@@ -42,7 +42,7 @@ class VideoController: UIViewController, UIWebViewDelegate, UITableViewDelegate,
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(VideoController.methodOfReceivedNotification(_:)), name:"reloadStationsNotification", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(VideoController.videoFullscreenStarted), name:"UIWindowDidBecomeVisibleNotification", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(VideoController.videoFullscreenStoped), name:"UIWindowDidBecomeHiddenNotification", object: nil)
-
+        
         web?.delegate = self
         //web?.loadRequest(NSURLRequest(URL: NSURL(string: "http://100fm.multix.co.il/")!))
         web?.loadHTMLString("<html><body style=\"margin: 0;\"><video width=\"100%\" height=\"100%\" preload=\"none\" poster=\"http://assets-jpcust.jwpsrv.com/thumbs/teD8sDdM-720.jpg\"><source type=\"application/x-mpegURL\" src=\"http://hlscdn.streamgates.net/radios100fm/abr/playlist.m3u8\" /></video></body></html>", baseURL: nil)
@@ -90,7 +90,7 @@ class VideoController: UIViewController, UIWebViewDelegate, UITableViewDelegate,
     func methodOfReceivedNotification(notification: NSNotification){
         reloadData()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -142,7 +142,6 @@ class VideoController: UIViewController, UIWebViewDelegate, UITableViewDelegate,
         
         return cell
     }
-
-
+    
+    
 }
-
