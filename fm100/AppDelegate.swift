@@ -52,6 +52,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         swipeRight.direction = UISwipeGestureRecognizerDirection.Right
         drawerViewController.view.addGestureRecognizer(swipeRight)
         
+        /*let mouseDrag:UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(AppDelegate.respondToSwipeGesture(_:)))
+        mouseDrag.numberOfTouchesRequired = 1
+        mouseDrag.minimumPressDuration = 0.2
+        drawerViewController.view.addGestureRecognizer(mouseDrag)*/
+        
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(AppDelegate.respondToSwipeGesture(_:)))
         swipeLeft.direction = UISwipeGestureRecognizerDirection.Left
         drawerViewController.view.addGestureRecognizer(swipeLeft)

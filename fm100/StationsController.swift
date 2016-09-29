@@ -163,6 +163,8 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
         let img1:UIImageView = self.covers[0]
         let img2:UIImageView = self.covers[1]
         
+        //print("changeBackgroundImage ", image)
+        
         img2.kf_setImageWithURL(
             NSURL(string: image)!,
             placeholderImage: nil,
@@ -172,22 +174,24 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
                 let pixelData = CGDataProviderCopyData(CGImageGetDataProvider((image?.CGImage)!)!)
                 let data: UnsafePointer<UInt8> = CFDataGetBytePtr(pixelData)
                 
-                let pixelInfo: Int = 0//((Int(self.view.frame.size.width) * Int(self.view.frame.size.width/2)) + Int(self.view.frame.size.height/2)) * 4
+                let pixelInfo: Int = 0
                 
                 let r = CGFloat(data[pixelInfo]) / CGFloat(255.0)
                 let g = CGFloat(data[pixelInfo+1]) / CGFloat(255.0)
                 let b = CGFloat(data[pixelInfo+2]) / CGFloat(255.0)
                 let a = CGFloat(data[pixelInfo+3]) / CGFloat(255.0)
                 
-                if r == g && g == b && b == r {
+                /*if r == g && g == b && b == r {
                     self.mainColor = self.currentStation.color
                     self.hideBackgroundImage()
                     self.hideDownloadButton()
                     return
-                }
+                }*/
                 
                 self.mainColor = UIColor(red: r, green: g, blue: b, alpha: a)
                 
+                img1.hidden = false
+                img2.hidden = false
                 UIView.animateWithDuration(0.5, delay: 0.0, options: .CurveLinear, animations: {
                     img1.layer.opacity = 0
                     img2.layer.opacity = 1
@@ -230,7 +234,6 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
     
     func reloadSongName() {
         FM100Api.shared.getSongXML(currentStation.info) { xml, error in
-            
             if( error == nil ) {
                 var name:String = ""
                 var artist:String = ""
@@ -242,12 +245,19 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
                 if xml["track"]["artist"].text != nil {
                     artist = xml["track"]["artist"].text!
                 }
-                if artist != "" && artist != " " && self.lastSong != name {
+                
+                if artist == " " || artist == "" {
+                    self.hideDownloadButton()
+                    self.hideBackgroundImage()
+                    self.changeSongDisplay(self.currentStation.name, artist: "", cache: true)
+                } else if self.lastSong != name {
                     self.changeSongDisplay(name, artist: artist, cache: true)
                     
                     if self.currentStation.slug != "100fm" {
                         let key:String = name + " " + artist
+                        //print("https://itunes.apple.com/search?limit=1&country=IL&term=" + key.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())!)
                         Alamofire.request(.GET, "https://itunes.apple.com/search?limit=1&country=IL&term=" + key.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())!).responseJSON { response in
+                            //print(response.result.value)
                             if( response.result.value != nil ) {
                                 self.changeDarken(self.covers[1], dark: 0.9)
                                 let result:JSON = JSON(response.result.value!)
@@ -255,7 +265,6 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
                                     let data:JSON = result["results"][0]
                                     
                                     self.showDownloadButton(data["artworkUrl30"].stringValue, url: data["trackViewUrl"].stringValue)
-                                    
                                     self.changeBackgroundImage(data["artworkUrl100"].stringValue.stringByReplacingOccurrencesOfString("100x100", withString: "400x400"))
                                 } else {
                                     self.hideDownloadButton()
@@ -270,7 +279,7 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
                         self.hideDownloadButton()
                     }
                 } else {
-                    FM100Api.shared.addFavChannel(self.currentStation.slug)
+                    //FM100Api.shared.addFavChannel(self.currentStation.slug)
                 }
             } else {
                 self.hideDownloadButton()
@@ -576,8 +585,8 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
             isInterruption = false
             if isPlaying {
                 stopAnimation()
-                startRadio();
             }
+            startRadio()
         }
     }
     
@@ -592,7 +601,7 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
         if( self.currentStation.slug != station.slug ) {
             self.currentStation = FM100Api.shared.stations[index]
             stopRadio()
-            startRadio();
+            startRadio()
         }
     }
     
