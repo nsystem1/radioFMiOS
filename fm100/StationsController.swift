@@ -121,8 +121,8 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
     func StationChanged(index:Int) {
         changeStation(index)
         
-        FIRAnalytics.logEventWithName("change_channel", parameters: [
-            "name": self.currentStation.slug,
+        FIRAnalytics.logEventWithName("channel_" + self.currentStation.slug, parameters: [
+            "name": self.currentStation.name,
             "full_text": self.currentStation.name
             ])
     }

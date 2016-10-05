@@ -472,7 +472,7 @@ class SportController: UIViewController, CLLocationManagerDelegate, UITableViewD
     
     // MARK: TableViewDelegate
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if( !isSummeryMode ) {
+        if( !isSummeryMode && self.archive.count > indexPath.row ) {
             currentRun = self.archive[indexPath.row]
             self.performSegueWithIdentifier("showSummery", sender: self)
         }
