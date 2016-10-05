@@ -133,8 +133,10 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
             self.lastArtist = artist
         }
         
-        self.lblSong!.text = name.capitalizedString
-        self.lblArtist!.text = artist.capitalizedString
+        dispatch_async(dispatch_get_main_queue(),{
+            self.lblSong!.text = name.capitalizedString
+            self.lblArtist!.text = artist.capitalizedString
+        })
         
         let nowPlayingInfo = [MPMediaItemPropertyArtist : artist.capitalizedString,  MPMediaItemPropertyTitle : name.capitalizedString, MPMediaItemPropertyArtwork : MPMediaItemArtwork(image:UIImage(named: "share")!)]
         MPNowPlayingInfoCenter.defaultCenter().nowPlayingInfo = nowPlayingInfo
@@ -165,39 +167,41 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
         
         //print("changeBackgroundImage ", image)
         
-        img2.kf_setImageWithURL(
-            NSURL(string: image)!,
-            placeholderImage: nil,
-            optionsInfo: nil,
-            progressBlock: nil,
-            completionHandler: { (image, error, cacheType, imageURL) -> () in
-                let pixelData = CGDataProviderCopyData(CGImageGetDataProvider((image?.CGImage)!)!)
-                let data: UnsafePointer<UInt8> = CFDataGetBytePtr(pixelData)
-                
-                let pixelInfo: Int = 0
-                
-                let r = CGFloat(data[pixelInfo]) / CGFloat(255.0)
-                let g = CGFloat(data[pixelInfo+1]) / CGFloat(255.0)
-                let b = CGFloat(data[pixelInfo+2]) / CGFloat(255.0)
-                let a = CGFloat(data[pixelInfo+3]) / CGFloat(255.0)
-                
-                /*if r == g && g == b && b == r {
-                    self.mainColor = self.currentStation.color
-                    self.hideBackgroundImage()
-                    self.hideDownloadButton()
-                    return
-                }*/
-                
-                self.mainColor = UIColor(red: r, green: g, blue: b, alpha: a)
-                
-                img1.hidden = false
-                img2.hidden = false
-                UIView.animateWithDuration(0.5, delay: 0.0, options: .CurveLinear, animations: {
-                    img1.layer.opacity = 0
-                    img2.layer.opacity = 1
-                }) { finished in
-                    self.covers = [img2, img1]
-                }
+        dispatch_async(dispatch_get_main_queue(),{
+            img2.kf_setImageWithURL(
+                NSURL(string: image)!,
+                placeholderImage: nil,
+                optionsInfo: nil,
+                progressBlock: nil,
+                completionHandler: { (image, error, cacheType, imageURL) -> () in
+                    let pixelData = CGDataProviderCopyData(CGImageGetDataProvider((image?.CGImage)!)!)
+                    let data: UnsafePointer<UInt8> = CFDataGetBytePtr(pixelData)
+                    
+                    let pixelInfo: Int = 0
+                    
+                    let r = CGFloat(data[pixelInfo]) / CGFloat(255.0)
+                    let g = CGFloat(data[pixelInfo+1]) / CGFloat(255.0)
+                    let b = CGFloat(data[pixelInfo+2]) / CGFloat(255.0)
+                    let a = CGFloat(data[pixelInfo+3]) / CGFloat(255.0)
+                    
+                    /*if r == g && g == b && b == r {
+                        self.mainColor = self.currentStation.color
+                        self.hideBackgroundImage()
+                        self.hideDownloadButton()
+                        return
+                    }*/
+                    
+                    self.mainColor = UIColor(red: r, green: g, blue: b, alpha: a)
+                    
+                    img1.hidden = false
+                    img2.hidden = false
+                    UIView.animateWithDuration(0.5, delay: 0.0, options: .CurveLinear, animations: {
+                        img1.layer.opacity = 0
+                        img2.layer.opacity = 1
+                    }) { finished in
+                        self.covers = [img2, img1]
+                    }
+            })
         })
     }
     
@@ -556,6 +560,7 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
     func showRateMe() {
         let alert = UIAlertController(title: "דרגו אותנו", message: "תודה רבה על השימוש באפליקציה של רדיוס 100FM\nתרצו לדרג אותנו באפ סטור?", preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "דרג את האפליקציה", style: UIAlertActionStyle.Default, handler: { alertAction in
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "neverRate")
             UIApplication.sharedApplication().openURL(NSURL(string : "itms-apps://itunes.apple.com/app/id946941095")!)
             alert.dismissViewControllerAnimated(true, completion: nil)
         }))
