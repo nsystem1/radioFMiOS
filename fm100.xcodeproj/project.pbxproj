@@ -30,8 +30,8 @@
 		CF6592BC1D2CF51B00C48751 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF6592BA1D2CF51B00C48751 /* LaunchScreen.storyboard */; };
 		CF6592C71D2CF51C00C48751 /* fm100Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6592C61D2CF51C00C48751 /* fm100Tests.swift */; };
 		CF6592D21D2CF51C00C48751 /* fm100UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6592D11D2CF51C00C48751 /* fm100UITests.swift */; };
-		CF6632DD1D9C036B009A3865 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF6632DB1D9C036B009A3865 /* UserNotifications.framework */; };
-		CF6632DE1D9C036B009A3865 /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF6632DC1D9C036B009A3865 /* UserNotificationsUI.framework */; };
+		CF6632DD1D9C036B009A3865 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF6632DB1D9C036B009A3865 /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		CF6632DE1D9C036B009A3865 /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF6632DC1D9C036B009A3865 /* UserNotificationsUI.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		CF6632DF1D9C0402009A3865 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6592AF1D2CF51B00C48751 /* AppDelegate.swift */; };
 		CF6632E01D9C0402009A3865 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6592AF1D2CF51B00C48751 /* AppDelegate.swift */; };
 		CF759A1A1D78658B0049BA32 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF759A191D78658B0049BA32 /* Reachability.swift */; };
@@ -710,6 +710,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = fm100/fm100.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = NO;
@@ -734,6 +735,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = fm100/fm100.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = NO;

@@ -79,7 +79,9 @@ class TimeTableController: UIViewController, UITableViewDelegate, UITableViewDat
             }
             self.day_index -= 1
             if( self.day_index < programs_today.count ) {
-                self.tableView?.scrollToRowAtIndexPath(NSIndexPath(forRow: self.day_index, inSection: self.day), atScrollPosition: UITableViewScrollPosition.Middle, animated: false)
+                dispatch_async(dispatch_get_main_queue(),{
+                    self.tableView?.scrollToRowAtIndexPath(NSIndexPath(forRow: self.day_index, inSection: self.day), atScrollPosition: UITableViewScrollPosition.Middle, animated: false)
+                })
             }
         }
     }
