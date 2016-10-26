@@ -61,91 +61,64 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         swipeLeft.direction = UISwipeGestureRecognizerDirection.Left
         drawerViewController.view.addGestureRecognizer(swipeLeft)
         
-        /*let deviceToken = FM100Api.shared.getPushToken()
-        if (deviceToken == "") {
-            print("There is no deviceToken saved yet.")
-            let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
-            UIApplication.sharedApplication().registerUserNotificationSettings(settings)
-            UIApplication.sharedApplication().registerForRemoteNotifications()
-        } else {
-            print("token ", deviceToken)
-        }
-        
-        if ( application.applicationState == UIApplicationState.Inactive || application.applicationState == UIApplicationState.Background  )
-        {
-            //opened from a push notification when the app was on background
-        }*/
-        
-        /*if #available(iOS 10.0, *) {
-            let authOptions : UNAuthorizationOptions = [.Alert, .Badge, .Sound]
-            UNUserNotificationCenter.currentNotificationCenter().requestAuthorizationWithOptions(
-                authOptions,
-                completionHandler: {_,_ in })
-            
-            // For iOS 10 display notification (sent via APNS)
-            UNUserNotificationCenter.currentNotificationCenter().delegate = self
-            // For iOS 10 data message (sent via FCM)
-            FIRMessaging.messaging().remoteMessageDelegate = self
-            
-        } else {
-         }*/
         let settings: UIUserNotificationSettings =
             UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
         application.registerUserNotificationSettings(settings)
         application.registerForRemoteNotifications()
         
+        if let launchOptions = launchOptions {
+            let notificationPayload: NSDictionary = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey] as! NSDictionary!
+            if let url = notificationPayload["url"] as? String {
+                parserURL(url)
+            }
+        }
+        
         return true
     }
     
-    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        print("Got token data! (deviceToken)")
-        FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.Prod)
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        if let url = userInfo["url"] as? String {
+            parserURL(url)
+        }
+    }
+    
+    func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
+        parserURL(url.absoluteString!)
         
-        /*let characterSet: NSCharacterSet = NSCharacterSet( charactersInString: "<>" )
-        
-        let deviceTokenString: String = ( deviceToken.description as NSString )
-            .stringByTrimmingCharactersInSet( characterSet )
-            .stringByReplacingOccurrencesOfString( " ", withString: "" ) as String
-        
-        let deviceTokenLocal = FM100Api.shared.getPushToken()
-        if (deviceTokenLocal != deviceTokenString) {
-            FM100Api.shared.setPushToken(deviceTokenString)
-            
-            Alamofire.request(.GET, "http://digital.100fm.co.il/app/token.php?token=" + deviceTokenString).responseJSON { response in
-                
+        return true
+    }
+    
+    func parserURL( url:String ) {
+        if url.rangeOfString("fm100") != nil{
+            if let range = url.rangeOfString("?slug=") {
+                FM100Api.shared.setPushVal( url.substringFromIndex(range.endIndex) )
+                NSNotificationCenter.defaultCenter().postNotificationName("RemotePushReceivedNotification", object: nil)
             }
-        }*/
+        }
+    }
+    
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.Prod)
     }
     
     func applicationWillResignActive(application: UIApplication) {
-        print("applicationWillResignActive")
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
         //NSNotificationCenter.defaultCenter().postNotificationName("appStatusBackgroud", object: nil)
     }
     
     func applicationDidEnterBackground(application: UIApplication) {
-        print("applicationDidEnterBackground")
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         NSNotificationCenter.defaultCenter().postNotificationName("appStatusBackgroud", object: nil)
     }
     
     func applicationWillEnterForeground(application: UIApplication) {
-        print("applicationWillEnterForeground")
-        // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
         NSNotificationCenter.defaultCenter().postNotificationName("appStatusActive", object: nil)
     }
     
     func applicationDidBecomeActive(application: UIApplication) {
-        print("applicationDidBecomeActive")
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         NSNotificationCenter.defaultCenter().postNotificationName("appStatusInterruption", object: nil)
     }
     
     func applicationWillTerminate(application: UIApplication) {
         print("applicationWillTerminate")
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
     func respondToSwipeGesture(gesture: UIGestureRecognizer) {

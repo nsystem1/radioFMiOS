@@ -33,6 +33,9 @@ class FM100Api : NSObject {
     
     func getInfo(onCompletion: (Bool) -> Void) {
         Alamofire.request(.GET, infoURL, parameters: [:]).responseJSON { response in
+            if response.result.error != nil {
+                onCompletion(false)
+            }
             if let data = response.result.value {
                 let json = JSON(data)
                 self.stations.removeAll()
@@ -61,8 +64,9 @@ class FM100Api : NSObject {
     func getSongXML(url:String, onCompletion: ServiceResponseXML) {
         Alamofire.request(.GET, url)
             .responseData { response in
-                
-                if let data = response.data {
+                if response.result.error != nil {
+                    onCompletion(XML.parse(response.data!), NSError.init(domain: "100fm.co.il", code: 500, userInfo: nil))
+                } else if let data = response.data {
                     onCompletion(XML.parse(data), nil)
                 } else {
                     onCompletion(XML.parse(response.data!), NSError.init(domain: "100fm.co.il", code: 500, userInfo: nil))
@@ -78,6 +82,9 @@ class FM100Api : NSObject {
         
         Alamofire.request(.GET, "http://www.100fm.co.il/smartphoneXML/programs.aspx")
             .responseData { response in
+                if response.result.error != nil {
+                    onCompletion(false)
+                }
                 if let data = response.data {
                     let xml = XML.parse(data)
                     
@@ -120,6 +127,13 @@ class FM100Api : NSObject {
     func setDefaultsValue( val:String, key:String ) {
         defaults.setValue(val, forKey: key)
         defaults.synchronize()
+    }
+    
+    func setPushVal( val:String ) {
+        setDefaultsValue(val, key: "keyPushValue")
+    }
+    func getPushVal() -> String {
+        return getDefaultsValue("keyPushValue", fail: "")
     }
     
     func addFavChannel(slug:String) {

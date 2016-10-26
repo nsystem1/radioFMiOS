@@ -20,6 +20,12 @@ class FMTabBar : UITabBarController {
         }
         
         //self.selectedIndex = 2
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FMTabBar.ReceivedNotification(_:)), name:"RemotePushReceivedNotification", object: nil)
+    }
+    
+    func ReceivedNotification(notification: NSNotification){
+        self.selectedIndex = 0
     }
     
     override func viewWillLayoutSubviews() {

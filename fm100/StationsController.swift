@@ -70,6 +70,7 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
     
     var isInterruption:Bool = false
     var isConnected:Bool = false
+    var isBackground:Bool = false
     
     @IBAction func clickPlay() {
         
@@ -162,12 +163,13 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
     }
     
     func changeBackgroundImage( image:String ) {
-        let img1:UIImageView = self.covers[0]
-        let img2:UIImageView = self.covers[1]
         
         //print("changeBackgroundImage ", image)
         
         dispatch_async(dispatch_get_main_queue(),{
+            let img1:UIImageView = self.covers[0]
+            let img2:UIImageView = self.covers[1]
+            
             img2.kf_setImageWithURL(
                 NSURL(string: image)!,
                 placeholderImage: nil,
@@ -183,13 +185,6 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
                     let g = CGFloat(data[pixelInfo+1]) / CGFloat(255.0)
                     let b = CGFloat(data[pixelInfo+2]) / CGFloat(255.0)
                     let a = CGFloat(data[pixelInfo+3]) / CGFloat(255.0)
-                    
-                    /*if r == g && g == b && b == r {
-                        self.mainColor = self.currentStation.color
-                        self.hideBackgroundImage()
-                        self.hideDownloadButton()
-                        return
-                    }*/
                     
                     self.mainColor = UIColor(red: r, green: g, blue: b, alpha: a)
                     
@@ -214,22 +209,24 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
                 let weekDay:Int = ( myComponents!.weekday + 6 ) % 7
                 let hour:Int = (myComponents?.hour)! * 100
                 
-                if weekDay >= 0 && weekDay < 8 {
+                if weekDay >= 0 && weekDay < 8 && FM100Api.shared.programs.count > 0 {
                     
                     let programs = FM100Api.shared.programs[weekDay]
-                    var currentProgram:Program = programs[0]
-                    for program in programs {
-                        let start_hour:Int = Int(program.start.stringByReplacingOccurrencesOfString(":", withString: ""))!
-                        if( hour >= start_hour ) {
-                            currentProgram = program
+                    if( programs.count > 0 ) {
+                        var currentProgram:Program = programs[0]
+                        for program in programs {
+                            let start_hour:Int = Int(program.start.stringByReplacingOccurrencesOfString(":", withString: ""))!
+                            if( hour >= start_hour ) {
+                                currentProgram = program
+                            }
                         }
-                    }
-                    self.changeSongDisplay(currentProgram.name, artist: currentProgram.author == "" ? self.lastArtist : currentProgram.author, cache: false)
-                    
-                    if currentProgram.image == "" {
-                        self.hideBackgroundImage()
-                    } else {
-                        self.changeBackgroundImage(currentProgram.image)
+                        self.changeSongDisplay(currentProgram.name, artist: currentProgram.author == "" ? self.lastArtist : currentProgram.author, cache: false)
+                        
+                        if currentProgram.image == "" {
+                            self.hideBackgroundImage()
+                        } else {
+                            self.changeBackgroundImage(currentProgram.image)
+                        }
                     }
                 }
             }
@@ -543,6 +540,21 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
         }
         
         rateMe()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(StationsController.ReceivedNotification(_:)), name:"RemotePushReceivedNotification", object: nil)
+    }
+    
+    
+    func ReceivedNotification(notification: NSNotification){
+        let slug:String = FM100Api.shared.getPushVal()
+        let stations:[Station] = FM100Api.shared.stations
+        
+        for index in 0..<stations.count {
+            if( stations[index].slug == slug ) {
+                self.changeStation( index )
+                self.list?.changeStation(index)
+            }
+        }
     }
     
     func rateMe() {
@@ -583,6 +595,14 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
         if isPlaying {
             startAnimation()
         }
+        isBackground = false
+    }
+    
+    func stopAnimationNotification(notification: NSNotification){
+        if isPlaying {
+            stopAnimation()
+        }
+        isBackground = true
     }
     
     func startInterruptionNotification(notification: NSNotification){
@@ -592,12 +612,6 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
                 stopAnimation()
             }
             startRadio()
-        }
-    }
-    
-    func stopAnimationNotification(notification: NSNotification){
-        if isPlaying {
-            stopAnimation()
         }
     }
     
