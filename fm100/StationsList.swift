@@ -29,7 +29,7 @@ class StationsList : UIScrollView, UIScrollViewDelegate {
     
     var delegateStation:StationDelegate! = nil
     
-    func setStations(stations:[Station]) {
+    func setStations(stations:[Station], animate:Bool) {
         self.stations = stations;
         
         self.decelerationRate = UIScrollViewDecelerationRateFast
@@ -37,28 +37,37 @@ class StationsList : UIScrollView, UIScrollViewDelegate {
         reloadData()
         reloadData()
         self.selected = self.stations.count
-        self.scrollRectToVisible(CGRectMake(0, CGFloat(self.stations.count) * (self.imgh + self.imgh2) * 2, self.frame.size.width, self.frame.size.height), animated: false)
         
-        self.layer.opacity = 0
-        UIView.animateWithDuration(2.0, delay: 0.0, options: .CurveEaseInOut, animations: {
-            self.layer.opacity = 1
+        if( animate ) {
+            self.scrollRectToVisible(CGRectMake(0, CGFloat(self.stations.count) * (self.imgh + self.imgh2) * 2, self.frame.size.width, self.frame.size.height), animated: false)
+            
+            self.layer.opacity = 0
+            UIView.animateWithDuration(2.0, delay: 0.0, options: .CurveEaseInOut, animations: {
+                self.layer.opacity = 1
+                self.scrollRectToVisible(CGRectMake(0, CGFloat(self.stations.count) * (self.imgh + self.imgh2), self.frame.size.width, self.frame.size.height), animated: false)
+            }) { finished in
+                self.finishPop()
+            }
+            
+            UIView.animateWithDuration(0.3, delay: 1.7, options: .CurveEaseInOut, animations: {
+                self.drawStation(self.contentOffset.y)
+            }) { finished in
+            }
+        } else {
             self.scrollRectToVisible(CGRectMake(0, CGFloat(self.stations.count) * (self.imgh + self.imgh2), self.frame.size.width, self.frame.size.height), animated: false)
-        }) { finished in
-            self.delegate = self
             
-            let v:UIView = self.views[self.selected]
-            self.arrow1.frame = CGRectMake(8, v.frame.origin.y + v.frame.height / 2,self.arrow1.frame.size.width, self.arrow1.frame.size.height)
-            self.arrow2.frame = CGRectMake(self.frame.size.width - 20 - 8, self.arrow1.frame.origin.y, self.arrow2.frame.size.width, self.arrow2.frame.size.height)
-            self.arrow1.hidden = false
-            self.arrow2.hidden = false
-            
-            //self.changeStation(0);
+            finishPop()
         }
+    }
+    
+    func finishPop() {
+        self.delegate = self
         
-        UIView.animateWithDuration(0.3, delay: 1.7, options: .CurveEaseInOut, animations: {
-            self.drawStation(self.contentOffset.y)
-        }) { finished in
-        }
+        let v:UIView = self.views[self.selected]
+        self.arrow1.frame = CGRectMake(8, v.frame.origin.y + v.frame.height / 2,self.arrow1.frame.size.width, self.arrow1.frame.size.height)
+        self.arrow2.frame = CGRectMake(self.frame.size.width - 20 - 8, self.arrow1.frame.origin.y, self.arrow2.frame.size.width, self.arrow2.frame.size.height)
+        self.arrow1.hidden = false
+        self.arrow2.hidden = false
     }
     
     func changeStation(index:Int) {

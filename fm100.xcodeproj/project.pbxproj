@@ -383,7 +383,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Leonid Angarov";
 				TargetAttributes = {
 					CF6592AB1D2CF51B00C48751 = {

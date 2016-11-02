@@ -71,6 +71,7 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
     var isInterruption:Bool = false
     var isConnected:Bool = false
     var isBackground:Bool = false
+    var cachedBackgroundImage:String = ""
     
     @IBAction func clickPlay() {
         
@@ -87,11 +88,12 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
     }
     
     @IBAction func showFacebook() {
-        let content = LinkShareContent(url: NSURL(string: "http://digital.100fm.co.il/#" + currentStation.slug)!,
+        var content = LinkShareContent(url: NSURL(string: "http://digital.100fm.co.il/#" + currentStation.slug)!,
                                        title: "",
                                        description: "",
-                                       quote: "\"" + lastSong.capitalizedString + "\" BY " + lastArtist.capitalizedString,
+                                       quote: "I'm listening to " + lastSong.capitalizedString + " on " + currentStation.name + " radios 100fm app \"",
                                        imageURL: nil)
+        content.hashtag = Hashtag("#100fmDigital")
         showShareDialog(content, mode: .Automatic)
     }
     
@@ -164,40 +166,42 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
     
     func changeBackgroundImage( image:String ) {
         
-        //print("changeBackgroundImage ", image)
-        
-        dispatch_async(dispatch_get_main_queue(),{
-            let img1:UIImageView = self.covers[0]
-            let img2:UIImageView = self.covers[1]
-            
-            img2.kf_setImageWithURL(
-                NSURL(string: image)!,
-                placeholderImage: nil,
-                optionsInfo: nil,
-                progressBlock: nil,
-                completionHandler: { (image, error, cacheType, imageURL) -> () in
-                    let pixelData = CGDataProviderCopyData(CGImageGetDataProvider((image?.CGImage)!)!)
-                    let data: UnsafePointer<UInt8> = CFDataGetBytePtr(pixelData)
-                    
-                    let pixelInfo: Int = 0
-                    
-                    let r = CGFloat(data[pixelInfo]) / CGFloat(255.0)
-                    let g = CGFloat(data[pixelInfo+1]) / CGFloat(255.0)
-                    let b = CGFloat(data[pixelInfo+2]) / CGFloat(255.0)
-                    let a = CGFloat(data[pixelInfo+3]) / CGFloat(255.0)
-                    
-                    self.mainColor = UIColor(red: r, green: g, blue: b, alpha: a)
-                    
-                    img1.hidden = false
-                    img2.hidden = false
-                    UIView.animateWithDuration(0.5, delay: 0.0, options: .CurveLinear, animations: {
-                        img1.layer.opacity = 0
-                        img2.layer.opacity = 1
-                    }) { finished in
-                        self.covers = [img2, img1]
-                    }
+        if( !isBackground ) {
+            dispatch_async(dispatch_get_main_queue(),{
+                let img1:UIImageView = self.covers[0]
+                let img2:UIImageView = self.covers[1]
+                
+                img2.kf_setImageWithURL(
+                    NSURL(string: image)!,
+                    placeholderImage: nil,
+                    optionsInfo: nil,
+                    progressBlock: nil,
+                    completionHandler: { (image, error, cacheType, imageURL) -> () in
+                        let pixelData = CGDataProviderCopyData(CGImageGetDataProvider((image?.CGImage)!)!)
+                        let data: UnsafePointer<UInt8> = CFDataGetBytePtr(pixelData)
+                        
+                        let pixelInfo: Int = 0
+                        
+                        let r = CGFloat(data[pixelInfo]) / CGFloat(255.0)
+                        let g = CGFloat(data[pixelInfo+1]) / CGFloat(255.0)
+                        let b = CGFloat(data[pixelInfo+2]) / CGFloat(255.0)
+                        let a = CGFloat(data[pixelInfo+3]) / CGFloat(255.0)
+                        
+                        self.mainColor = UIColor(red: r, green: g, blue: b, alpha: a)
+                        
+                        img1.hidden = false
+                        img2.hidden = false
+                        UIView.animateWithDuration(0.5, delay: 0.0, options: .CurveLinear, animations: {
+                            img1.layer.opacity = 0
+                            img2.layer.opacity = 1
+                        }) { finished in
+                            self.covers = [img2, img1]
+                        }
+                })
             })
-        })
+        } else {
+            cachedBackgroundImage = image
+        }
     }
     
     func getRadioProgram() {
@@ -553,6 +557,7 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
             if( stations[index].slug == slug ) {
                 self.changeStation( index )
                 self.list?.changeStation(index)
+                FM100Api.shared.setPushVal("")
             }
         }
     }
@@ -596,6 +601,7 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
             startAnimation()
         }
         isBackground = false
+        changeBackgroundImage(cachedBackgroundImage)
     }
     
     func stopAnimationNotification(notification: NSNotification){
@@ -645,10 +651,23 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
             FM100Api.shared.getInfo({ status in
                 dispatch_async(dispatch_get_main_queue(),{
                     if( status ) {
-                        //self.currentStation = FM100Api.shared.stations[0]
-                        self.changeStation(0)
-                        self.list?.setStations(FM100Api.shared.stations)
-                        //self.startRadio();
+                        
+                        let slug:String = FM100Api.shared.getPushVal()
+                        
+                        self.list?.setStations(FM100Api.shared.stations, animate: slug == "")
+                        
+                        if( slug != "" ) {
+                            let stations:[Station] = FM100Api.shared.stations
+                            for index in 0..<stations.count {
+                                if( stations[index].slug == slug ) {
+                                    self.changeStation( index )
+                                    self.list?.changeStation(index)
+                                    FM100Api.shared.setPushVal("")
+                                }
+                            }
+                        } else {
+                            self.changeStation(0)
+                        }
                         
                         NSNotificationCenter.defaultCenter().postNotificationName("reloadStationsNotification", object: nil)
                     }

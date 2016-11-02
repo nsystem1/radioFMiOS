@@ -66,12 +66,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerUserNotificationSettings(settings)
         application.registerForRemoteNotifications()
         
-        if let launchOptions = launchOptions {
+        /*if let launchOptions = launchOptions {
             let notificationPayload: NSDictionary = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey] as! NSDictionary!
             if let url = notificationPayload["url"] as? String {
                 parserURL(url)
             }
-        }
+        }*/
         
         return true
     }
