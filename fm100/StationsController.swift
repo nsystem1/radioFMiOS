@@ -168,6 +168,7 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
         
         if( !isBackground ) {
             dispatch_async(dispatch_get_main_queue(),{
+                self.cachedBackgroundImage = ""
                 let img1:UIImageView = self.covers[0]
                 let img2:UIImageView = self.covers[1]
                 
@@ -601,7 +602,9 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
             startAnimation()
         }
         isBackground = false
-        changeBackgroundImage(cachedBackgroundImage)
+        if cachedBackgroundImage != "" {
+            changeBackgroundImage(cachedBackgroundImage)
+        }
     }
     
     func stopAnimationNotification(notification: NSNotification){
