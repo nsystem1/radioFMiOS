@@ -91,7 +91,7 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
         var content = LinkShareContent(url: NSURL(string: "http://digital.100fm.co.il/#" + currentStation.slug)!,
                                        title: "",
                                        description: "",
-                                       quote: "I'm listening to " + lastSong.capitalizedString + " on " + currentStation.name + " radios 100fm app \"",
+                                       quote: "I'm listening to " + lastSong.capitalizedString + " on " + currentStation.name + " - Radios 100fm app",
                                        imageURL: nil)
         content.hashtag = Hashtag("#100fmDigital")
         showShareDialog(content, mode: .Automatic)
