@@ -178,25 +178,27 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
                     optionsInfo: nil,
                     progressBlock: nil,
                     completionHandler: { (image, error, cacheType, imageURL) -> () in
-                        let pixelData = CGDataProviderCopyData(CGImageGetDataProvider((image?.CGImage)!)!)
-                        let data: UnsafePointer<UInt8> = CFDataGetBytePtr(pixelData)
-                        
-                        let pixelInfo: Int = 0
-                        
-                        let r = CGFloat(data[pixelInfo]) / CGFloat(255.0)
-                        let g = CGFloat(data[pixelInfo+1]) / CGFloat(255.0)
-                        let b = CGFloat(data[pixelInfo+2]) / CGFloat(255.0)
-                        let a = CGFloat(data[pixelInfo+3]) / CGFloat(255.0)
-                        
-                        self.mainColor = UIColor(red: r, green: g, blue: b, alpha: a)
-                        
-                        img1.hidden = false
-                        img2.hidden = false
-                        UIView.animateWithDuration(0.5, delay: 0.0, options: .CurveLinear, animations: {
-                            img1.layer.opacity = 0
-                            img2.layer.opacity = 1
-                        }) { finished in
-                            self.covers = [img2, img1]
+                        if( error == nil ) {
+                            let pixelData = CGDataProviderCopyData(CGImageGetDataProvider((image?.CGImage)!)!)
+                            let data: UnsafePointer<UInt8> = CFDataGetBytePtr(pixelData)
+                            
+                            let pixelInfo: Int = 0
+                            
+                            let r = CGFloat(data[pixelInfo]) / CGFloat(255.0)
+                            let g = CGFloat(data[pixelInfo+1]) / CGFloat(255.0)
+                            let b = CGFloat(data[pixelInfo+2]) / CGFloat(255.0)
+                            let a = CGFloat(data[pixelInfo+3]) / CGFloat(255.0)
+                            
+                            self.mainColor = UIColor(red: r, green: g, blue: b, alpha: a)
+                            
+                            img1.hidden = false
+                            img2.hidden = false
+                            UIView.animateWithDuration(0.5, delay: 0.0, options: .CurveLinear, animations: {
+                                img1.layer.opacity = 0
+                                img2.layer.opacity = 1
+                            }) { finished in
+                                self.covers = [img2, img1]
+                            }
                         }
                 })
             })
