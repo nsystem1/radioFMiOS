@@ -35,6 +35,7 @@ class FM100Api : NSObject {
         Alamofire.request(.GET, infoURL, parameters: [:]).responseJSON { response in
             if response.result.error != nil {
                 onCompletion(false)
+                return
             }
             if let data = response.result.value {
                 let json = JSON(data)
@@ -84,6 +85,7 @@ class FM100Api : NSObject {
             .responseData { response in
                 if response.result.error != nil {
                     onCompletion(false)
+                    return
                 }
                 if let data = response.data {
                     let xml = XML.parse(data)
@@ -137,9 +139,32 @@ class FM100Api : NSObject {
     }
     
     func addFavChannel(slug:String) {
+        let slugStr:String = getDefaultsValue("keySlugs", fail: ",")
+        var slugs:[String] = slugStr.componentsSeparatedByString(",")
         
+        print("slug ", slug, " slugStr ", slugStr)
+        if slugs.count > 0 {
+            if slugs[0] != slug {
+                for i in 0..<slugs.count {
+                    if( i < slugs.count ) {
+                        if( slugs[i] == slug ) {
+                            slugs.removeAtIndex(i)
+                        }
+                    }
+                }
+                slugs.insert(slug, atIndex: 0)
+                if slugs.count > 4 {
+                    slugs.removeAtIndex(slugs.count - 1)
+                }
+                setDefaultsValue(slugs.joinWithSeparator(","), key: "keySlugs")
+            }
+        }
     }
-    
+    func getLastFavChannelsSlug() -> String {
+        let slugStr:String = getDefaultsValue("keySlugs", fail: ",")
+        var slugs:[String] = slugStr.componentsSeparatedByString(",")
+        return slugs[0]
+    }
     /*func getFavChannels() -> [Station] {
      
      }*/

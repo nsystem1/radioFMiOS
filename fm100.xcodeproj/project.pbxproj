@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		53507DAB3B3F1A4611341533 /* Pods_fm100.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF01EF882CB87C64D0B53484 /* Pods_fm100.framework */; };
+		C1D25A0DFC520224C616390E /* Pods_fm100Widget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0999C5C42E949AF324D923E7 /* Pods_fm100Widget.framework */; };
 		CF00585F1D3D1FFC00BCBE18 /* FBSPOILER-BLACK.OTF in Resources */ = {isa = PBXBuildFile; fileRef = CF00585C1D3D1F8A00BCBE18 /* FBSPOILER-BLACK.OTF */; };
 		CF0058601D3D1FFC00BCBE18 /* FBSPOILER-LIGHT.OTF in Resources */ = {isa = PBXBuildFile; fileRef = CF00585D1D3D1F8A00BCBE18 /* FBSPOILER-LIGHT.OTF */; };
 		CF0058631D3D20B000BCBE18 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CF0058611D3D208F00BCBE18 /* OpenSans-Bold.ttf */; };
@@ -43,6 +44,10 @@
 		CF9583921D4630A5007CFB10 /* fake.json in Resources */ = {isa = PBXBuildFile; fileRef = CF9583911D4630A5007CFB10 /* fake.json */; };
 		CF998BAD1D3BC13D00CA8BEE /* YouTubeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF998BAC1D3BC13D00CA8BEE /* YouTubeCell.swift */; };
 		CFC571ED1D6F224D009A770A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFC571EC1D6F224D009A770A /* GoogleService-Info.plist */; };
+		CFCB823E1DDDBE9B0043FE45 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFCB823D1DDDBE9B0043FE45 /* NotificationCenter.framework */; };
+		CFCB82411DDDBE9B0043FE45 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCB82401DDDBE9B0043FE45 /* TodayViewController.swift */; };
+		CFCB82441DDDBE9B0043FE45 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CFCB82421DDDBE9B0043FE45 /* MainInterface.storyboard */; };
+		CFCB82481DDDBE9B0043FE45 /* fm100Widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CFCB823C1DDDBE9B0043FE45 /* fm100Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		CFE0C0161D77053D00A5CE1A /* GRDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFE0C0151D77053D00A5CE1A /* GRDB.framework */; };
 		CFE0C0181D770E0700A5CE1A /* RunCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE0C0171D770E0700A5CE1A /* RunCell.swift */; };
 		CFE97E4C1D3E51F100EF124E /* SportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE97E4B1D3E51F100EF124E /* SportController.swift */; };
@@ -65,11 +70,34 @@
 			remoteGlobalIDString = CF6592AB1D2CF51B00C48751;
 			remoteInfo = fm100;
 		};
+		CFCB82461DDDBE9B0043FE45 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CF6592A41D2CF51B00C48751 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CFCB823B1DDDBE9B0043FE45;
+			remoteInfo = fm100Widget;
+		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		CFCB824C1DDDBE9B0043FE45 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				CFCB82481DDDBE9B0043FE45 /* fm100Widget.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		0999C5C42E949AF324D923E7 /* Pods_fm100Widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fm100Widget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9692C82BA98A3C8B4B544A7A /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A871FF04CF9B74829F2D77E6 /* Pods-fm100.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fm100.debug.xcconfig"; path = "Pods/Target Support Files/Pods-fm100/Pods-fm100.debug.xcconfig"; sourceTree = "<group>"; };
+		B13B6EF1618AC09B3B09463F /* Pods-fm100Widget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fm100Widget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-fm100Widget/Pods-fm100Widget.debug.xcconfig"; sourceTree = "<group>"; };
 		CF00585C1D3D1F8A00BCBE18 /* FBSPOILER-BLACK.OTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FBSPOILER-BLACK.OTF"; sourceTree = "<group>"; };
 		CF00585D1D3D1F8A00BCBE18 /* FBSPOILER-LIGHT.OTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FBSPOILER-LIGHT.OTF"; sourceTree = "<group>"; };
 		CF0058611D3D208F00BCBE18 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
@@ -112,12 +140,18 @@
 		CFB9A0E11D92C6EF00EEC872 /* Assistant-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Assistant-Light.ttf"; sourceTree = "<group>"; };
 		CFB9A0E21D92C6EF00EEC872 /* Assistant-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Assistant-Regular.ttf"; sourceTree = "<group>"; };
 		CFC571EC1D6F224D009A770A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CFCB823C1DDDBE9B0043FE45 /* fm100Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = fm100Widget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		CFCB823D1DDDBE9B0043FE45 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		CFCB82401DDDBE9B0043FE45 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		CFCB82431DDDBE9B0043FE45 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		CFCB82451DDDBE9B0043FE45 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CFCC78971D3E640C001E8734 /* fm100.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = fm100.entitlements; sourceTree = "<group>"; };
 		CFE0C0151D77053D00A5CE1A /* GRDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GRDB.framework; path = "Pods/../build/Debug-iphoneos/GRDB.swift/GRDB.framework"; sourceTree = "<group>"; };
 		CFE0C0171D770E0700A5CE1A /* RunCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunCell.swift; sourceTree = "<group>"; };
 		CFE97E4B1D3E51F100EF124E /* SportController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SportController.swift; sourceTree = "<group>"; };
 		CFEB3F2E1D2E9624009132B2 /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		CFEE9E641D57268B00AF629C /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../../Library/Developer/Xcode/DerivedData/fm100-crrcrdtirgwtgqbngetivbdlzgfp/Build/Products/Debug-iphonesimulator/Alamofire.framework"; sourceTree = "<group>"; };
+		F2060D5F0EFF59CF8A8A87F5 /* Pods-fm100Widget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fm100Widget.release.xcconfig"; path = "Pods/Target Support Files/Pods-fm100Widget/Pods-fm100Widget.release.xcconfig"; sourceTree = "<group>"; };
 		F4E7FE58CB37B5D1AE452C62 /* Pods-fm100.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fm100.release.xcconfig"; path = "Pods/Target Support Files/Pods-fm100/Pods-fm100.release.xcconfig"; sourceTree = "<group>"; };
 		FF01EF882CB87C64D0B53484 /* Pods_fm100.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fm100.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -151,6 +185,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CFCB82391DDDBE9B0043FE45 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFCB823E1DDDBE9B0043FE45 /* NotificationCenter.framework in Frameworks */,
+				C1D25A0DFC520224C616390E /* Pods_fm100Widget.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -159,6 +202,8 @@
 			children = (
 				A871FF04CF9B74829F2D77E6 /* Pods-fm100.debug.xcconfig */,
 				F4E7FE58CB37B5D1AE452C62 /* Pods-fm100.release.xcconfig */,
+				B13B6EF1618AC09B3B09463F /* Pods-fm100Widget.debug.xcconfig */,
+				F2060D5F0EFF59CF8A8A87F5 /* Pods-fm100Widget.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -175,6 +220,8 @@
 				CFEE9E641D57268B00AF629C /* Alamofire.framework */,
 				9692C82BA98A3C8B4B544A7A /* Pods.framework */,
 				FF01EF882CB87C64D0B53484 /* Pods_fm100.framework */,
+				CFCB823D1DDDBE9B0043FE45 /* NotificationCenter.framework */,
+				0999C5C42E949AF324D923E7 /* Pods_fm100Widget.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -199,6 +246,7 @@
 				CF6592AE1D2CF51B00C48751 /* fm100 */,
 				CF6592C51D2CF51C00C48751 /* fm100Tests */,
 				CF6592D01D2CF51C00C48751 /* fm100UITests */,
+				CFCB823F1DDDBE9B0043FE45 /* fm100Widget */,
 				CF6592AD1D2CF51B00C48751 /* Products */,
 				C7216A4E25EEE772EE46DF35 /* Frameworks */,
 				94DE5FCB800A013CDC376AA8 /* Pods */,
@@ -211,6 +259,7 @@
 				CF6592AC1D2CF51B00C48751 /* fm100.app */,
 				CF6592C21D2CF51C00C48751 /* fm100Tests.xctest */,
 				CF6592CD1D2CF51C00C48751 /* fm100UITests.xctest */,
+				CFCB823C1DDDBE9B0043FE45 /* fm100Widget.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -316,6 +365,16 @@
 			name = UI;
 			sourceTree = "<group>";
 		};
+		CFCB823F1DDDBE9B0043FE45 /* fm100Widget */ = {
+			isa = PBXGroup;
+			children = (
+				CFCB82401DDDBE9B0043FE45 /* TodayViewController.swift */,
+				CFCB82421DDDBE9B0043FE45 /* MainInterface.storyboard */,
+				CFCB82451DDDBE9B0043FE45 /* Info.plist */,
+			);
+			path = fm100Widget;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -330,10 +389,12 @@
 				257F088A41C3204AD1C23A65 /* [CP] Embed Pods Frameworks */,
 				CECF073916C1F7819DAB8FF2 /* [CP] Copy Pods Resources */,
 				CF759A141D7825F10049BA32 /* ShellScript */,
+				CFCB824C1DDDBE9B0043FE45 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				CFCB82471DDDBE9B0043FE45 /* PBXTargetDependency */,
 			);
 			name = fm100;
 			productName = fm100;
@@ -376,13 +437,32 @@
 			productReference = CF6592CD1D2CF51C00C48751 /* fm100UITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		CFCB823B1DDDBE9B0043FE45 /* fm100Widget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CFCB824B1DDDBE9B0043FE45 /* Build configuration list for PBXNativeTarget "fm100Widget" */;
+			buildPhases = (
+				7B9713AE9D4F0631EAD27CAC /* [CP] Check Pods Manifest.lock */,
+				CFCB82381DDDBE9B0043FE45 /* Sources */,
+				CFCB82391DDDBE9B0043FE45 /* Frameworks */,
+				CFCB823A1DDDBE9B0043FE45 /* Resources */,
+				CCD3766B4EC55212A6F4B915 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = fm100Widget;
+			productName = fm100Widget;
+			productReference = CFCB823C1DDDBE9B0043FE45 /* fm100Widget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		CF6592A41D2CF51B00C48751 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0730;
+				LastSwiftUpdateCheck = 0810;
 				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Leonid Angarov";
 				TargetAttributes = {
@@ -412,6 +492,11 @@
 						LastSwiftMigration = 0800;
 						TestTargetID = CF6592AB1D2CF51B00C48751;
 					};
+					CFCB823B1DDDBE9B0043FE45 = {
+						CreatedOnToolsVersion = 8.1;
+						LastSwiftMigration = 0810;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = CF6592A71D2CF51B00C48751 /* Build configuration list for PBXProject "fm100" */;
@@ -430,6 +515,7 @@
 				CF6592AB1D2CF51B00C48751 /* fm100 */,
 				CF6592C11D2CF51C00C48751 /* fm100Tests */,
 				CF6592CC1D2CF51C00C48751 /* fm100UITests */,
+				CFCB823B1DDDBE9B0043FE45 /* fm100Widget */,
 			);
 		};
 /* End PBXProject section */
@@ -465,6 +551,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CFCB823A1DDDBE9B0043FE45 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFCB82441DDDBE9B0043FE45 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -481,6 +575,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-fm100/Pods-fm100-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7B9713AE9D4F0631EAD27CAC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		CCD3766B4EC55212A6F4B915 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-fm100Widget/Pods-fm100Widget-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CECF073916C1F7819DAB8FF2 /* [CP] Copy Pods Resources */ = {
@@ -575,6 +699,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CFCB82381DDDBE9B0043FE45 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFCB82411DDDBE9B0043FE45 /* TodayViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -587,6 +719,11 @@
 			isa = PBXTargetDependency;
 			target = CF6592AB1D2CF51B00C48751 /* fm100 */;
 			targetProxy = CF6592CE1D2CF51C00C48751 /* PBXContainerItemProxy */;
+		};
+		CFCB82471DDDBE9B0043FE45 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CFCB823B1DDDBE9B0043FE45 /* fm100Widget */;
+			targetProxy = CFCB82461DDDBE9B0043FE45 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -605,6 +742,14 @@
 				CF6592BB1D2CF51B00C48751 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		CFCB82421DDDBE9B0043FE45 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CFCB82431DDDBE9B0043FE45 /* Base */,
+			);
+			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -804,6 +949,41 @@
 			};
 			name = Release;
 		};
+		CFCB82491DDDBE9B0043FE45 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B13B6EF1618AC09B3B09463F /* Pods-fm100Widget.debug.xcconfig */;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = fm100Widget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.nxcast.il-100FM.fm100Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 2.3;
+			};
+			name = Debug;
+		};
+		CFCB824A1DDDBE9B0043FE45 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F2060D5F0EFF59CF8A8A87F5 /* Pods-fm100Widget.release.xcconfig */;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = fm100Widget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.nxcast.il-100FM.fm100Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -839,6 +1019,15 @@
 			buildConfigurations = (
 				CF6592DD1D2CF51C00C48751 /* Debug */,
 				CF6592DE1D2CF51C00C48751 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CFCB824B1DDDBE9B0043FE45 /* Build configuration list for PBXNativeTarget "fm100Widget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CFCB82491DDDBE9B0043FE45 /* Debug */,
+				CFCB824A1DDDBE9B0043FE45 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

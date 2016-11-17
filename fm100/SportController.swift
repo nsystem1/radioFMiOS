@@ -449,10 +449,12 @@ class SportController: UIViewController, CLLocationManagerDelegate, UITableViewD
     }
     
     @IBAction func showFacebook() {
-        let content = LinkShareContent(url: NSURL(string: "http://digital.100fm.co.il/")!,
+        var content = LinkShareContent(url: NSURL(string: "http://digital.100fm.co.il/")!,
                                        title: "",
                                        description: "",
+                                       quote: "",
                                        imageURL: nil)
+        content.hashtag = Hashtag("#100fmDigital")
         showShareDialog(content, mode: .Automatic)
     }
     

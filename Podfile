@@ -10,7 +10,7 @@ target 'fm100' do
     pod 'UIColor_Hex_Swift', '~> 2.1'
     pod 'Alamofire', '~> 3.4'
     pod 'Kingfisher', '~> 2.4'
-    pod 'SwiftyXMLParser', :git => 'https://github.com/yahoojapan/SwiftyXMLParser.git', :tag => '2.3.0'
+    pod 'SwiftyXMLParser', :git => 'https://github.com/yahoojapan/SwiftyXMLParser.git'
     pod 'FacebookCore', '~> 0.1.1'
     pod 'FacebookLogin', '~> 0.1.1'
     pod 'FacebookShare', '~> 0.1.1'
@@ -20,6 +20,11 @@ target 'fm100' do
     pod 'GRDB.swift', '~> 0.81.0'
     pod 'Fabric'
     pod 'Crashlytics'
+end
+
+target 'fm100Widget' do
+    pod 'SwiftyJSON', '~> 2.4.0'
+    pod 'Alamofire', '~> 3.4'
 end
 
 post_install do |installer|

@@ -286,8 +286,6 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
                         self.getRadioProgram()
                         self.hideDownloadButton()
                     }
-                } else {
-                    //FM100Api.shared.addFavChannel(self.currentStation.slug)
                 }
             } else {
                 self.hideDownloadButton()
@@ -486,7 +484,7 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
     
     
     @IBAction func clickGotoLive() {
-        list?.changeStation(0)
+        changeStationBySlug("100fm")
     }
     
     override func viewDidLoad() {
@@ -630,6 +628,7 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
         let station = FM100Api.shared.stations[index]
         if( self.currentStation.slug != station.slug ) {
             self.currentStation = FM100Api.shared.stations[index]
+            FM100Api.shared.addFavChannel(self.currentStation.slug)
             stopRadio()
             startRadio()
         }
@@ -651,29 +650,38 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
         }
     }
     
+    func changeStationBySlug(slug:String) {
+        let stations:[Station] = FM100Api.shared.stations
+        for index in 0..<stations.count {
+            if( stations[index].slug == slug ) {
+                self.changeStation( index )
+                self.list?.changeStation(index)
+            }
+        }
+    }
+    
     func reloadStations() {
         if( !FM100Api.shared.isDataLoaded ) {
             FM100Api.shared.getInfo({ status in
                 dispatch_async(dispatch_get_main_queue(),{
                     if( status ) {
-                        
-                        let slug:String = FM100Api.shared.getPushVal()
+                        var slug:String = FM100Api.shared.getPushVal()
+                        if( slug == "" ) {
+                            slug = FM100Api.shared.getLastFavChannelsSlug()
+                        }
+                        if( slug == "100fm" ) {
+                            slug = ""
+                        }
                         
                         self.list?.setStations(FM100Api.shared.stations, animate: slug == "")
                         
                         if( slug != "" ) {
-                            let stations:[Station] = FM100Api.shared.stations
-                            for index in 0..<stations.count {
-                                if( stations[index].slug == slug ) {
-                                    self.changeStation( index )
-                                    self.list?.changeStation(index)
-                                    FM100Api.shared.setPushVal("")
-                                }
-                            }
+                            self.changeStationBySlug(slug)
+                            FM100Api.shared.setPushVal("")
                         } else {
                             self.changeStation(0)
                         }
-                        
+                    
                         NSNotificationCenter.defaultCenter().postNotificationName("reloadStationsNotification", object: nil)
                     }
                 })
