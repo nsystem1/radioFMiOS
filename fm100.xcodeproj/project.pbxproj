@@ -18,6 +18,7 @@
 		CF01D09E1D2CF93F007A8D62 /* VideoYouTube.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF01D09D1D2CF93F007A8D62 /* VideoYouTube.swift */; };
 		CF01D0A11D2D14B8007A8D62 /* StationsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF01D0A01D2D14B8007A8D62 /* StationsList.swift */; };
 		CF0885D41D3F73100066CD69 /* RunRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0885D31D3F73100066CD69 /* RunRecord.swift */; };
+		CF10B7271DDF1FAB0016450F /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF10B7261DDF1FAB0016450F /* Channel.swift */; };
 		CF2098FB1D6B3A90007B000C /* TimeTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2098FA1D6B3A90007B000C /* TimeTableController.swift */; };
 		CF2098FD1D6B419B007B000C /* Program.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2098FC1D6B419B007B000C /* Program.swift */; };
 		CF2098FF1D6B47FC007B000C /* ProgramCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2098FE1D6B47FC007B000C /* ProgramCell.swift */; };
@@ -107,6 +108,8 @@
 		CF01D09D1D2CF93F007A8D62 /* VideoYouTube.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoYouTube.swift; sourceTree = "<group>"; };
 		CF01D0A01D2D14B8007A8D62 /* StationsList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationsList.swift; sourceTree = "<group>"; };
 		CF0885D31D3F73100066CD69 /* RunRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunRecord.swift; sourceTree = "<group>"; };
+		CF10B7251DDF18C00016450F /* fm100Widget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = fm100Widget.entitlements; sourceTree = "<group>"; };
+		CF10B7261DDF1FAB0016450F /* Channel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		CF2098FA1D6B3A90007B000C /* TimeTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeTableController.swift; sourceTree = "<group>"; };
 		CF2098FC1D6B419B007B000C /* Program.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Program.swift; sourceTree = "<group>"; };
 		CF2098FE1D6B47FC007B000C /* ProgramCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramCell.swift; sourceTree = "<group>"; };
@@ -368,7 +371,9 @@
 		CFCB823F1DDDBE9B0043FE45 /* fm100Widget */ = {
 			isa = PBXGroup;
 			children = (
+				CF10B7251DDF18C00016450F /* fm100Widget.entitlements */,
 				CFCB82401DDDBE9B0043FE45 /* TodayViewController.swift */,
+				CF10B7261DDF1FAB0016450F /* Channel.swift */,
 				CFCB82421DDDBE9B0043FE45 /* MainInterface.storyboard */,
 				CFCB82451DDDBE9B0043FE45 /* Info.plist */,
 			);
@@ -471,6 +476,9 @@
 						DevelopmentTeam = DQ7MN7BJ7X;
 						LastSwiftMigration = 0800;
 						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
@@ -494,8 +502,14 @@
 					};
 					CFCB823B1DDDBE9B0043FE45 = {
 						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = DQ7MN7BJ7X;
 						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -704,6 +718,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CFCB82411DDDBE9B0043FE45 /* TodayViewController.swift in Sources */,
+				CF10B7271DDF1FAB0016450F /* Channel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -955,9 +970,11 @@
 			buildSettings = {
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_ENTITLEMENTS = fm100Widget/fm100Widget.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = DQ7MN7BJ7X;
 				INFOPLIST_FILE = fm100Widget/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.nxcast.il-100FM.fm100Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -973,9 +990,11 @@
 			buildSettings = {
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_ENTITLEMENTS = fm100Widget/fm100Widget.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = DQ7MN7BJ7X;
 				INFOPLIST_FILE = fm100Widget/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.nxcast.il-100FM.fm100Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";

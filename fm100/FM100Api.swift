@@ -17,7 +17,7 @@ typealias ServiceResponseXML = (XML.Accessor, NSError?) -> Void
 
 class FM100Api : NSObject {
     
-    let defaults = NSUserDefaults.standardUserDefaults()
+    let defaults = NSUserDefaults.init(suiteName: "group.fm100SharingGroup")
     static let keyPush = "keyPushToken110"
     
     static let shared = FM100Api()
@@ -120,15 +120,15 @@ class FM100Api : NSObject {
     }
     
     func getDefaultsValue( key:String, fail:String ) -> String {
-        if let str = defaults.stringForKey(key) {
+        if let str = defaults!.stringForKey(key) {
             return str
         }
         return fail
     }
     
     func setDefaultsValue( val:String, key:String ) {
-        defaults.setValue(val, forKey: key)
-        defaults.synchronize()
+        defaults!.setValue(val, forKey: key)
+        defaults!.synchronize()
     }
     
     func setPushVal( val:String ) {
