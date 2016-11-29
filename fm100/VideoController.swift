@@ -51,10 +51,12 @@ class VideoController: UIViewController, UIWebViewDelegate, UITableViewDelegate,
     }
     
     func videoFullscreenStarted() {
+        print("videoFullscreenStarted")
         NSNotificationCenter.defaultCenter().postNotificationName("appStopRadio", object: nil)
     }
     
     func videoFullscreenStoped() {
+        print("videoFullscreenStoped")
         NSNotificationCenter.defaultCenter().postNotificationName("appStartRadio", object: nil)
     }
     

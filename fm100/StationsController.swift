@@ -307,6 +307,7 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
         }
         img.addSubview(blurEffectView)
     }
+    
     func startRadio() {
         do {
             try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
@@ -335,7 +336,6 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
                 UIApplication.sharedApplication().beginReceivingRemoteControlEvents()
                 self.becomeFirstResponder()
                 
-                
             } catch let error as NSError {
                 print(error.localizedDescription)
             }
@@ -361,18 +361,18 @@ class StationsController: UIViewController, StationDelegate, AVCaptureAudioDataO
     }
     
     func audioInterruption() {
-        isInterruption = true
+        if( isPlaying ) {
+            isInterruption = true
+        }
         stopRadio()
     }
     
     func startAnimation() {
-        //print("startAnimation")
         timerAnimation = NSTimer(fireDate: NSDate().dateByAddingTimeInterval(0), interval: animSpeed, target: self, selector: #selector(updateAnimation2), userInfo: nil, repeats: true)
         NSRunLoop.mainRunLoop().addTimer(timerAnimation, forMode: NSRunLoopCommonModes)
     }
     
     func stopAnimation() {
-        //print("stopAnimation")
         timerAnimation.invalidate()
     }
     
